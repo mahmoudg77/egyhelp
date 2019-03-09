@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "862734630161",
+    "firebase_url": "https://al-dawlia-test.firebaseio.com",
+    "project_id": "al-dawlia-test",
+    "storage_bucket": "al-dawlia-test.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862734630161:android:fb807b7f22fc10c3",
+        "android_client_info": {
+          "package_name": "com.webegy.aldawlia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862734630161-3dmggkkc43scp4ld9vnduh6v3rg16fti.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.webegy.aldawlia",
+            "certificate_hash": "eb878d3e59764eb2be90896c78397f2c86e74ef0"
+          }
+        },
+        {
+          "client_id": "862734630161-3cdo2jj450pba1noanepnjdpe8jbm66a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQC1mNb7D331MXFi21fT6MYTJv8tYri9A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862734630161-3cdo2jj450pba1noanepnjdpe8jbm66a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

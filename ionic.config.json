@@ -1,0 +1,7 @@
+{
+  "name": "aldawlia",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

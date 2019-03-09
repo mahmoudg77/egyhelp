@@ -1,0 +1,36 @@
+<div *ngIf="step==0">
+  <div id="recaptcha-container"></div>
+<p class="text-center" style="padding:60px 10xp">
+    لتسجيل الدخول تفضل بادخال رقم تليفونك ليصلك رسالة التفعيل
+</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating" dir="rtl">ادخل رقم التليفون</ion-label>
+    <ion-input formControlName="phone" type="number"></ion-input>
+  </ion-item>
+  <br/>
+  <ion-button expand="full" color="primary" type="submit" [disabled]="loginForm.invalid">
+      التــــالي
+  </ion-button>
+   
+</form>
+</div>
+<div *ngIf="step==1">
+    <p class="text-center" style="padding:60px 10xp">
+        ادخل كود التفعيل الذي وصل للتو في رسالة نصية على هاتفك
+    </p>
+    <form [formGroup]="verifyForm" (ngSubmit)="onVerify()">
+      <ion-item>
+         <ion-input formControlName="verifyCode" type="number"></ion-input>
+      </ion-item>
+      <br/>
+      <a href="javascript:;" (click)="onSubmit()">اعادة ارسال كود التفعيل</a>
+      <br/>
+      <ion-button expand="full" color="primary" type="submit" [disabled]="verifyForm.invalid">
+        تسجيل الدخول
+      </ion-button>
+    </form>
+</div>
+<div>
+  {{err|json}}
+</div>

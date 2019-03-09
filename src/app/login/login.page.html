@@ -1,0 +1,22 @@
+
+<ion-header>
+<ion-toolbar  dir="rtl">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+
+     <ion-title style="text-align:right">
+      تسجيل الدخول
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+    <div class="logo h-50 w-100 d-flex align-items-center">
+        <ion-img src="/assets/icon/favicon.png" ></ion-img>
+    </div>
+  
+  <app-user-login *ngIf="type==2"></app-user-login>
+  <app-client-login *ngIf="type==1"></app-client-login>
+</ion-content>
