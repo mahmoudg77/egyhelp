@@ -1,6 +1,7 @@
+import { LoginUserModule } from './login-user/login-user.module';
+import { LoginClientPageModule } from './login-client/login-client.module';
 import { SharedService } from './services/shared.service';
 import { LoadingService } from './services/loading.service';
-import { LoginPage } from './login/login.page';
 import { HomePageModule } from './home/home.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,7 +14,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClientAppModule } from './client-app/client-app.module';
-import { LoginPageModule } from './login/login.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +24,8 @@ import { LoginPageModule } from './login/login.module';
     AppRoutingModule,
     ClientAppModule,
     HomePageModule,
-    LoginPageModule
+    LoginClientPageModule,
+    LoginUserModule
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,66 @@
+
+<ion-header>
+<ion-toolbar  dir="rtl">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+     <ion-title style="text-align:right">
+      تسجيل الدخول
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content *ngIf="step==0">
+    <div class="logo h-50 w-100 d-flex align-items-center">
+        <ion-img src="/assets/icon/favicon.png" ></ion-img>
+    </div>
+  <div id="recaptcha-container"></div>
+<p class="text-center" style="padding:60px 10xp">
+    لتسجيل الدخول تفضل بادخال رقم تليفونك ليصلك رسالة التفعيل
+</p>
+<div [formGroup]="loginForm">
+  <ion-item>
+    <ion-label position="floating" dir="rtl">ادخل رقم التليفون</ion-label>
+    <ion-input formControlName="phone" type="number"></ion-input>
+  </ion-item>
+</div>
+</ion-content>
+<ion-footer *ngIf="step==0">
+  <ion-toolbar>
+      <ion-button  expand="full" color="primary" type="button"  (click)="onSubmit()" [disabled]="loginForm.invalid">
+          التــــالي
+      </ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+
+<ion-content *ngIf="step==1">
+    <div class="logo h-50 w-100 d-flex align-items-center">
+        <ion-img src="/assets/icon/favicon.png" ></ion-img>
+    </div>
+    <p class="text-center" style="padding:60px 10xp">
+        ادخل كود التفعيل الذي وصل للتو في رسالة نصية على هاتفك
+    </p>
+    <div [formGroup]="verifyForm" >
+      <ion-item>
+         <ion-input formControlName="verifyCode" type="number"></ion-input>
+      </ion-item>
+      <br/>
+      <a href="javascript:;" (click)="onSubmit()">اعادة ارسال كود التفعيل</a>
+    </div>
+    <div>
+      {{err|json}}
+    </div>
+</ion-content>
+<ion-footer  *ngIf="step==1">
+  <ion-toolbar>
+    <ion-title>
+        <ion-button expand="full" color="primary" type="button" (click)="onVerify()" [disabled]="verifyForm.invalid">
+            تسجيل الدخول
+          </ion-button>
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
+

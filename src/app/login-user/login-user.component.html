@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar  dir="rtl">
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+         <ion-title style="text-align:right">
+          تسجيل الدخول
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
+    
+    
+    
+    <ion-content>
+        <div class="logo h-50 w-100 d-flex align-items-center">
+            <ion-img src="/assets/icon/favicon.png" ></ion-img>
+        </div>
+    <p class="text-center" style="padding:60px 10xp">
+        لتسجيل الدخول تفضل بادخال اسم المستخدم وكلمة المرور
+    </p>
+    <div [formGroup]="loginForm" dir="rtl">
+      <ion-item>
+        <ion-label position="floating"  dir="rtl">اسم المستخدم:</ion-label>
+        <ion-input formControlName="username" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating" dir="rtl">كلمة المرور:</ion-label>
+        <ion-input formControlName="password" type="text"></ion-input>
+      </ion-item>
+      <br/>
+    
+    </div>
+    </ion-content>
+
+    <ion-footer>
+      <ion-toolbar>
+        <ion-button expand="full" color="primary" (click)="onSubmit()" type="submit" [disabled]="loginForm.invalid">
+          تسجيل الدخول
+        </ion-button>
+      </ion-toolbar>
+    </ion-footer>

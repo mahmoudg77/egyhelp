@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { ClientLoginComponent } from './client-login.component';
+import { LoginClientPage } from './login-client.page';
+
+
 
 @NgModule({
     imports: [
@@ -14,10 +16,9 @@ import { ClientLoginComponent } from './client-login.component';
       ReactiveFormsModule
     ],
     declarations: [
-        ClientLoginComponent,
-    ],
-    exports:[
-        ClientLoginComponent,
+      LoginClientPage,
     ]
   })
-  export class ClientLoginModule {}
+  export class LoginClientPageModule {}
+
+  

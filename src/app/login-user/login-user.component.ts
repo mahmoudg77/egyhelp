@@ -1,4 +1,4 @@
-import { SharedService } from './../../services/shared.service';
+import { SharedService } from './../services/shared.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoadingController } from '@ionic/angular';
@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-login',
-  templateUrl: './user-login.component.html',
-  styleUrls: ['./user-login.component.scss'],
+  templateUrl: './login-user.component.html',
+  styleUrls: ['./login-user.component.scss'],
 })
-export class UserLoginComponent implements OnInit {
+export class LoginUserPage implements OnInit {
   loginForm:FormGroup;
   constructor(
     private formBuilder:FormBuilder,

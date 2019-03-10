@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { UserLoginComponent } from './user-login.component';
+import { LoginUserPage } from './login-user.component';
 
 @NgModule({
     imports: [
@@ -14,10 +14,10 @@ import { UserLoginComponent } from './user-login.component';
       ReactiveFormsModule
     ],
     declarations: [
-        UserLoginComponent,
+      LoginUserPage,
+      
     ],
-    exports:[
-      UserLoginComponent,
-    ]
+   
+   
   })
-  export class UserLoginModule {}
+  export class LoginUserModule {}
