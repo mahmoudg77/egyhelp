@@ -1,5 +1,7 @@
+import { AuthService } from './../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +11,11 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 export class HomePage implements OnInit {
   ngOnInit(): void {
       this.statusBar.styleDefault();
+      this.statusBar.isVisible=true;
+
   }
   constructor(
-      private statusBar: StatusBar
+      private statusBar: StatusBar,
   ){
 
   }

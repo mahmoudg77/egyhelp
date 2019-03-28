@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Changa|Lalezar|Tajawal');
+
+body{
+    font-family: 'Changa', sans-serif  !important;
+}
+body *{
+    font-family: inherit !important;
+}
 --ion-title{
     text-align: right !important;
 }

@@ -1,0 +1,17 @@
+.logo-container{
+    height: 300px;
+    text-align: center;
+    padding: 50px;
+    padding-top: 100px;
+    ion-img{
+        width: 80%;
+        margin: auto;
+    }
+}
+ion-grid{
+    text-align: center;
+}
+
+.grecaptcha-badge {
+    display: none !important;
+}

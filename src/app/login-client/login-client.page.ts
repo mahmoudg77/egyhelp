@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -6,7 +7,6 @@ import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { Platform, ToastController } from '@ionic/angular';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 
 @Component({
   selector: 'page-client-login',
@@ -27,8 +27,8 @@ export class LoginClientPage implements OnInit {
     private router:Router,
     private shared:SharedService,
     private formBuilder:FormBuilder,
-    private statusBar:StatusBar
-  
+    private statusBar:StatusBar,
+    private auth:AuthService,
     ) { 
     this.loginForm=this.formBuilder.group({
       phone:['',Validators.required],
@@ -42,36 +42,48 @@ export class LoginClientPage implements OnInit {
   ngOnInit() {
     this.platform.ready().then(next=>{
       this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container',{
-        size:"invisible"
+        size:"invisible",
+        
       }); 
       this.recaptchaVerifier.render();
     });
     this.statusBar.styleDefault()
+    this.statusBar.isVisible=true;
   }
 
-  async onSubmit(){
+  onSubmit(){
     if (this.platform.is('cordova')) {
       this.loadingService.present("جاري التحقق من البيانات ...");
       firebase.auth().signInWithPhoneNumber("+20"+this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
-
         this.verificationId = credential.verificationId;
+        
          firebase.auth().onAuthStateChanged(next=>{
-          this.loadingService.dismiss().then(()=>{
-                this.router.navigateByUrl("/client/home");
-          });
+                if(next==null) {
+                   this.loadingService.dismiss();
+                  this.step=1;
+                  this.toastController.create({message:"null firebase auth",duration:2})
+                  return;
+                }
+                next.getIdToken().then(token=>{
+                  var idToken=token;
+                  this.auth.clientLogin(idToken,
+                    next=>{
+                      this.router.navigateByUrl("/client/home");
+                      if(this.loadingService.isLoading)  
+                      this.loadingService.dismiss();
+                    },
+                    error=>{
+                    })
+                },error=>{
+                });
+         
          },error=>{
-          console.log(error);
-         },()=>{
+
+        },()=>{
 
          })
-
-      }).finally(async ()=>{
-         this.loadingService.dismiss().then(()=>{
-         this.step=1;
-         
-        });
       }).catch(error=>{
-        this.err=error + ":" + "+20"+this.loginForm.get("phone").value;
+        this.toastController.create({message:error,duration:2})
       });
     }
    
@@ -81,15 +93,15 @@ export class LoginClientPage implements OnInit {
 
   onVerify(){
     if (this.platform.is('cordova')) {
-      this.loadingService.present("جاري التحقق من البيانات ...");
+      if(!this.loadingService.isLoading)this.loadingService.present("جاري التحقق من البيانات ...");
       const code:string=<string>this.verifyForm.get("verifyCode").value;
       let signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, `${code}`);
 
       firebase.auth().signInWithCredential(signInCredential).then((info) => {
-         console.log(info);
+        
       }, 
       (error) => {
-        console.log(error);
+
       }
       );
 

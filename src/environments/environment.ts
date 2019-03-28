@@ -11,8 +11,10 @@ export const environment = {
     projectId: "al-dawlia-test",
     storageBucket: "al-dawlia-test.appspot.com",
     messagingSenderId: "862734630161"
-  }
-
+  },
+  tokenKey:"x-aldawlia-token-key",
+  apiKey:"7F53sB7WZEMXjuMju4vhj8DzvpLNtUuGGTE3CWREk9CTGXSET5qPUgFD7XRpDkozyrahw7bxVWZqHrc4",
+  apiUrl:"https://dawlia.nearyouweb.com"
 };
 
 /*

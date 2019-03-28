@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { ClientHomeComponent } from './../client-home/client-home.component';
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router';
 @NgModule({
     imports: [
         CommonModule, 
+        FormsModule,
         RouterModule,
         IonicModule.forRoot(),
 

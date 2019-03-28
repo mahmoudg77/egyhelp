@@ -1,1 +1,20 @@
 // component css goes here
+.order-status{
+    height: 5px;
+}
+    .order-closed{
+        background-color: #000;
+    }
+    
+    .order-waiting{
+        background-color: #ebc20e;
+    }
+
+/* Custom Skeleton Line Height and Margin */
+.custom-skeleton ion-skeleton-text {
+    line-height: 13px;
+  }
+  
+  .custom-skeleton ion-skeleton-text:last-child {
+    margin-bottom: 5px;
+  }

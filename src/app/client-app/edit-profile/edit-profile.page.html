@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>البيانات الشخصية</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+   
+
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating" dir="rtl">اسم العميل</ion-label>
+      <ion-input formControlName="NAME" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" ></ion-label>
+      <ion-select formControlName="CUNTRY_ID" placeholder="المحافظة" #C (ionChange)="loadCities(C.value)">
+          <ion-select-option *ngFor="let gov of Countries" value="{{gov.CUNTRY_ID}}">{{gov.CUNTRY_NAM}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"></ion-label>
+      <ion-select formControlName="CITY_ID" placeholder="المنطقة">
+          <ion-select-option *ngFor="let city of Cities" value="{{city.CITY_ID}}">{{city.CITY_NAM}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">العنوان</ion-label>
+      <ion-textarea formControlName="ADDRESS"  ></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label  position="stacked" > رقم تليفون أرضي</ion-label>
+      <ion-input formControlName="TEL1" type="phone" ></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">رقم موبايل آخر</ion-label>
+        <ion-input formControlName="MOBIL1" type="phone"  ></ion-input>
+      </ion-item>
+
+   
+  </form>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid no-padding>
+      <ion-row>
+        <ion-col size="6"> 
+          <ion-button  expand="full" block color="primary"  [disabled]="form.invalid" (click)="saveProfile()">
+            حفظ البيانات
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button  expand="full" block color="secondary"   (click)="cancel()">
+                الغــاء
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+     
+  </ion-toolbar>
+</ion-footer>

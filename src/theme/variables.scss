@@ -75,6 +75,8 @@
 //   --ion-color-light-shade: #d7d8da;
 //   --ion-color-light-tint: #f5f6f9;
 // }
+
+
 :root {
   --ion-color-primary: #2471ff;
   --ion-color-primary-rgb: 36,113,255;
@@ -139,3 +141,14 @@
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
 }
+
+$colors: (
+  primary:    #0553ac,
+  secondary:  #990505,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  bkg:        #fffec5,
+);
+
+//@import "ionic.ionicons";

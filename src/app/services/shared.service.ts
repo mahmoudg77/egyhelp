@@ -4,6 +4,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedService {
+  error(message: string){
+    alert(message);
+  }
+  success(message: string){
+    alert(message);
+  }
 
   constructor() { }
 

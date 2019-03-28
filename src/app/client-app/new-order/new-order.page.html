@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>تسجيل امر صيانة</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+   
+    <form [formGroup]="form">
+             
+       
+  
+          
+        <ion-item *ngIf="method==1">
+          <ion-label position="floating" dir="rtl">الجهاز</ion-label>
+          <ion-select #device placeholder="الجهاز"  (ionChange)="parsDeviceID(C.value)">
+              <ion-select-option *ngFor="let dev of MyDevices" value="{{dev.ID}}">{{dev.Name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item  *ngIf="method==2">
+          <ion-label position="floating" ></ion-label>
+          <ion-select formControlName="DeviceTypeID" placeholder="نوع الجهاز">
+              <ion-select-option *ngFor="let dev of DeviceTypes" value="{{dev.TYP_Devices_ID}}">{{dev.TYP_Devices_NAM}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item  *ngIf="method==2">
+            <ion-label position="floating" ></ion-label>
+            <ion-select formControlName="MarkID" placeholder="الماركة">
+                <ion-select-option *ngFor="let dev of Marks" value="{{dev.MARK_ID}}">{{dev.MARK_NAM}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        
+        <ion-item>
+          <ion-label position="stacked">العطل/الشكوى</ion-label>
+          <ion-textarea formControlName="ComplaintNote"></ion-textarea>
+        </ion-item>
+       
+       
+      </form>
+    
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar>
+      <ion-grid no-padding>
+        <ion-row>
+          <ion-col size="6"> 
+            <ion-button  expand="full" block color="primary"  [disabled]="form.invalid" (click)="saveOrder()">
+              ارسال الطلب
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+              <ion-button  expand="full" block color="secondary"   (click)="cancel()">
+                  الغــاء
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+       
+    </ion-toolbar>
+  </ion-footer>

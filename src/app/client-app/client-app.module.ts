@@ -1,3 +1,4 @@
+import { EditProfilePageModule } from './edit-profile/edit-profile.module';
 import { AppComponent } from './../app.component';
 import { ClientHomeComponent } from './client-home/client-home.component';
  // Angular Imports
@@ -10,6 +11,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ClientHomeModule } from './client-home/client-home.module';
+import { NewOrderPageModule } from './new-order/new-order.module';
 
 const routes: Routes = [
    
@@ -40,7 +42,9 @@ const routes: Routes = [
         CommonModule, 
         IonicModule.forRoot(),
         RouterModule.forChild(routes),
-        ClientHomeModule
+        ClientHomeModule,
+        NewOrderPageModule,
+        EditProfilePageModule
     ],
     declarations: [
       ClientAppComponent,

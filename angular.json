@@ -32,12 +32,7 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/assets/bootstrap.min.css"
-              },
-              {
-                "input": "src/assets/bootstrap-rtl.min.css"
-              },
+             
               {
                 "input": "src/theme/variables.scss"
               },
