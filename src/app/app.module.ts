@@ -1,3 +1,4 @@
+import { LookupsService } from './services/bll/lookups.service';
 import { CheckPageModule } from './check/check.module';
 import { UserService } from './services/user.service';
 import { ImageUploaderService } from './services/dal/image-uploader.service';
@@ -20,6 +21,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ClientAppModule } from './client-app/client-app.module';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersService } from './services/bll/orders.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,7 +46,9 @@ import { HttpClientModule } from '@angular/common/http';
     AuthService,
     CallapiService,
     ImageUploaderService,
-    UserService
+    UserService,
+    LookupsService,
+    OrdersService
   ],
   bootstrap: [AppComponent]
 })

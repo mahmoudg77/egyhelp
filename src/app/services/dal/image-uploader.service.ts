@@ -1,28 +1,27 @@
- import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { CallapiService } from './callapi.service';
 
+export class ImageFile{
+  file:File;
+  model:string;
+  id:number;
+  tag?:string="main";
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ImageUploaderService {
 
-  file:File;
-  model:string;
-  id:number;
-  tag?:string="main";
-  constructor(_file:File,_model:string,_id:number,private call:CallapiService,_tag:string="main"){
-    this.file=_file;
-    this.model=_model;
-    this.id=_id;
-    this.tag=_tag;
+  constructor(private  call:CallapiService){
+  
   }
 
-  upload(success_callbak:any,error_callback:any=null){
+  upload(img:ImageFile,success_callbak:any,error_callback:any=null){
     const uploadData = new FormData();
    //console.log(this.file);
-    uploadData.append('img', this.file, this.file.name);
+    uploadData.append('img', img.file,img.file.name);
 
-    this.call.postRequest("/Image/Upload?model="+this.model+"&model_id="+this.id+"&model_tag="+this.tag,uploadData,
+    this.call.postRequest("/Image/Upload?model="+img.model+"&model_id="+img.id+"&model_tag="+img.tag,uploadData,
       res=>{
         if(success_callbak){
           success_callbak(res);

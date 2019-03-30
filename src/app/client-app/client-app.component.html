@@ -3,24 +3,23 @@
     <ion-menu>
       <ion-header>
         <ion-toolbar color="primary">
-            <button ion-button menuToggle>
-                <ion-icon name="menu"></ion-icon>
-            </button>
-          <ion-title>Menu</ion-title>
+          <ion-title>              
+            <img src="assets/icon/favicon.png"/>
+          </ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" >
-            <ion-item [routerDirection]="'root'" *ngFor="let p of appPages" [routerLink]="[p.url]">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
-              <ion-label>
+          <ion-menu-toggle auto-hide="false"  >
+            <ion-item [routerDirection]="'root'"  *ngFor="let p of appPages" [routerLink]="[p.url]">
+              <ion-icon slot="start" [name]="p.icon" color="primary"></ion-icon>
+              <ion-label color="primary">
                 {{p.title}}
               </ion-label>
             </ion-item>
             <ion-item [routerDirection]="'root'" (click)="logout()">
-              <ion-icon slot="start" name="list"></ion-icon>
-              <ion-label>
+              <ion-icon color="primary" slot="start" name="log-out"></ion-icon>
+              <ion-label color="primary">
                تسجيل الخروج
               </ion-label>
             </ion-item>

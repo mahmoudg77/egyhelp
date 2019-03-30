@@ -10,3 +10,22 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
+ion-toolbar {
+    --background: #810505 no-repeat fixed center; 
+    --color:#fff;
+ }
+//  ion-content{
+//      --background-color:rgb(252, 225, 225);
+//  }
+ion-content{
+    //--background:url('assets/imgs/hexagon-background.png') no-repeat !important;
+    --background:#fce1e1 url('assets/imgs/bg.jpg') no-repeat fixed center;
+    // a,p,h1,h2,h3{
+    //     color:#fad818 !important;
+    // }
+}
+
+ ion-card{
+     --background:#fdfdfd !important;
+ }

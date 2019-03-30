@@ -12,20 +12,30 @@
     
     
     <ion-content>
-        <div class="logo h-50 w-100 d-flex align-items-center">
-            <ion-img src="/assets/icon/favicon.png" ></ion-img>
-        </div>
-    <p class="text-center" style="padding:60px 10xp">
-        لتسجيل الدخول تفضل بادخال اسم المستخدم وكلمة المرور
-    </p>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+              <div class="logo-container">
+                  <ion-img src="/assets/icon/favicon.png" ></ion-img>
+                </div>
+          </ion-col>
+          <ion-col size="12">
+              <p class="text-center" style="padding:60px 10xp">
+                  لتسجيل الدخول تفضل بادخال اسم المستخدم وكلمة المرور
+              </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+
+        
+    
     <div [formGroup]="loginForm" dir="rtl">
       <ion-item>
-        <ion-label position="floating"  dir="rtl">اسم المستخدم:</ion-label>
-        <ion-input formControlName="username" type="text"></ion-input>
+        <ion-input formControlName="username" type="text"  placeholder="اسم المستخدم"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating" dir="rtl">كلمة المرور:</ion-label>
-        <ion-input formControlName="password" type="text"></ion-input>
+        <ion-input formControlName="password" type="password" placeholder="كلمة المرور" ></ion-input>
       </ion-item>
       <br/>
     

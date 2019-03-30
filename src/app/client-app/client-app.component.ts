@@ -11,14 +11,29 @@ import { Router } from '@angular/router';
 export class ClientAppComponent implements OnInit {
     public appPages = [
         {
-          title: 'Home',
+          title: 'الرئيسية',
           url: '/client/home',
           icon: 'home'
         },
         {
-          title: 'List',
-          url: '/list',
-          icon: 'list'
+          title: 'اوردرات الصيانة',
+          url: '/client/orders',
+          icon: 'filing'
+        },
+        {
+          title: 'فواتيــــري',
+          url: '/client/invoices',
+          icon: 'card'
+        },
+        {
+          title: 'الموقع الإلكتروني',
+          url: '/client/website',
+          icon: 'planet'
+        },
+        {
+          title: 'تعليمات',
+          url: '/client/help',
+          icon: 'help-circle'
         }
       ];
 
@@ -27,7 +42,7 @@ export class ClientAppComponent implements OnInit {
         this.statusBar.isVisible=true;
 
         // let status bar overlay webview
-        this.statusBar.show();
+        this.statusBar.styleLightContent();
 
           // set status bar to white
         this.statusBar.backgroundColorByName("primary");

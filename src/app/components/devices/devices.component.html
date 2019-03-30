@@ -3,7 +3,7 @@
       <ion-grid fixed>
           <ion-row>
             <ion-col  size="4" *ngFor="let dev of DeviceTypes">
-              <a (click)="selectDevice(n)">
+              <a (click)="selectDevice(dev.TYP_Devices_ID)">
                 <ion-img src="{{env.apiUrl}}/Content/imgs/devices/{{dev.TYP_Devices_ID}}.png" style="height:80px;margin:auto" alt=""></ion-img>
                 <ion-label>{{dev.TYP_Devices_NAM}}</ion-label>
               </a>
@@ -15,8 +15,8 @@
        <ion-grid>
           <ion-row>
             <ion-col  size="4" *ngFor="let mark of Marks">
-              <a (click)="selectMark(n)">
-                <ion-img src="http://free-icon-rainbow.com/i/icon_02213/icon_022130_256.png" style="height:80px;margin:auto" alt=""></ion-img>
+              <a (click)="selectMark(mark.MARK_ID)">
+                <ion-img src="{{env.apiUrl}}/Content/imgs/marks/{{mark.MARK_ID}}.png" style="height:80px;margin:auto" alt=""></ion-img>
                 <ion-label>{{mark.MARK_NAM}}</ion-label>
               </a>
             </ion-col>

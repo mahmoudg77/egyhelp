@@ -4,7 +4,7 @@ import { LoadingService } from './../../services/loading.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/bll/orders.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-new-order',
@@ -24,6 +24,7 @@ export class NewOrderPage implements OnInit {
               private router:Router,
               private formBuilder:FormBuilder,
               private lookup:LookupsService,
+              private route:ActivatedRoute
               ) { 
 
                 if(auth.getUser()==null) {
@@ -43,9 +44,17 @@ export class NewOrderPage implements OnInit {
               }
 
   ngOnInit() {
-    this.loadMyDevices();
-    this.loadDevicetypes();
-    this.loadMarks();
+    // this.loadMyDevices();
+    // this.loadDevicetypes();
+    // this.loadMarks();
+    this.route.queryParams.subscribe(
+      params=>{
+        this.form.controls['DeviceTypeID'].setValue(+params['device']);
+        this.form.controls['MarkID'].setValue(+params['mark']);
+        this.form.controls['DeviceCode'].setValue(+params['code']);
+      }
+    )
+
   }
   loadMarks(): any {
     this.lookup.getDeviceTypes(next=>{
@@ -76,19 +85,23 @@ export class NewOrderPage implements OnInit {
   }
 
   saveOrder(){
+    this.loader.present();
+    this.orderData=this.form.getRawValue();
     this.order.saveOrder(this.orderData,
       next=>{
         if(next==true){
           this.router.navigateByUrl("/client/home");
+          this.loader.dismiss();
         }
       },
       error=>{
         alert(error);
+        this.loader.dismiss();
       })
   }
 
   cancel(){
-    this.router.navigateByUrl("client/home");
+    this.router.navigateByUrl("/client/home");
   }
   parsDeviceID(ID:string){
       const ids=ID.split("-");

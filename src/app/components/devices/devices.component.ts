@@ -52,6 +52,6 @@ export class DevicesComponent implements OnInit {
   }
   selectMark(n:number){
       this.selectedMark=n;
-      this.router.navigateByUrl("/new-order?device="+this.selectedDevice+"&mark="+this.selectedMark);
+      this.router.navigateByUrl("/new-order?device="+this.selectedDevice+"&mark="+this.selectedMark+"&code=1");
     }
   }

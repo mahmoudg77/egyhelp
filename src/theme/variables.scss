@@ -78,19 +78,19 @@
 
 
 :root {
-  --ion-color-primary: #2471ff;
+  --ion-color-primary: #810505;
   --ion-color-primary-rgb: 36,113,255;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255,255,255;
-  --ion-color-primary-shade: #2063e0;
-  --ion-color-primary-tint: #3a7fff;
+  --ion-color-primary-shade: #812828;
+  --ion-color-primary-tint: #9b4444;
 
-  --ion-color-secondary: #fd3145;
+  --ion-color-secondary: #089df3;
   --ion-color-secondary-rgb: 253,49,69;
   --ion-color-secondary-contrast: #ffffff;
   --ion-color-secondary-contrast-rgb: 255,255,255;
-  --ion-color-secondary-shade: #df2b3d;
-  --ion-color-secondary-tint: #fd4658;
+  --ion-color-secondary-shade: #3badf0;
+  --ion-color-secondary-tint: #74bfeb;
 
   --ion-color-tertiary: #756b64;
   --ion-color-tertiary-rgb: 117,107,100;
@@ -142,13 +142,14 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-$colors: (
-  primary:    #0553ac,
-  secondary:  #990505,
-  danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222,
-  bkg:        #fffec5,
-);
+//$ion-toolbar-color:rgb(129, 5, 5)
+// $colors: (
+//   primary:    #990505,
+//   secondary:  #0553ac,
+//   danger:     #f53d3d,
+//   light:      #f4f4f4,
+//   dark:       #222,
+//   bkg:        #fffec5,
+// );
 
 //@import "ionic.ionicons";
