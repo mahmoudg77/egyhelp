@@ -1,3 +1,4 @@
+import { apiError } from './../dal/api-result';
 import { CallapiService } from './../dal/callapi.service';
 import { Injectable } from '@angular/core';
 import { Guid } from "guid-typescript";
@@ -53,8 +54,9 @@ export class AuthService {
         //this.setToken(next.token);
         if(fnNext) fnNext(next);
       },
-      error=>{
-        this.setToken(null);
+      (error:apiError)=>{
+        //this.setToken(null);
+       
         if(fnError) fnError(error);
       }
     )
@@ -92,8 +94,8 @@ export class AuthService {
               error=>
                       {
                         //this.notifyService.stop();
-                        this.setUser(null);
-                        this.clearToken();
+                        // this.setUser(null);
+                        // this.clearToken();
                         //this.route.navigate(['/']);
                         if(fnError) fnError(error);
                     }

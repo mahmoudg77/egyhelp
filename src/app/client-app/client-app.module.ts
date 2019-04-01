@@ -1,3 +1,5 @@
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { NewOrderPageModule } from './new-order/new-order.module';
 import { EditProfilePageModule } from './edit-profile/edit-profile.module';
 import { AppComponent } from './../app.component';
 import { ClientHomeComponent } from './client-home/client-home.component';
@@ -11,7 +13,6 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ClientHomeModule } from './client-home/client-home.module';
-import { NewOrderPageModule } from './new-order/new-order.module';
 
 const routes: Routes = [
    
@@ -28,6 +29,14 @@ const routes: Routes = [
           path: 'home',
           component:ClientHomeComponent
         },
+        { path: 'my-orders', loadChildren: './my-orders/my-orders.module#MyOrdersPageModule' },
+        { path: 'new-order', loadChildren: './new-order/new-order.module#NewOrderPageModule' },
+        { path: 'edit-profile', loadChildren: './edit-profile/edit-profile.module#EditProfilePageModule' },
+        { path: 'select-device', loadChildren: './select-device/select-device.module#SelectDevicePageModule' },
+        { path: 'order-success', loadChildren: './order-success/order-success.module#OrderSuccessPageModule' },
+        { path: 'website', loadChildren: './website/website.module#WebsitePageModule' },
+        { path: 'order-details', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
+
 
       ]
     }
@@ -44,11 +53,15 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         ClientHomeModule,
         NewOrderPageModule,
-        EditProfilePageModule
+        EditProfilePageModule,
+        
     ],
     declarations: [
       ClientAppComponent,
        
+    ],
+    providers:[
+      InAppBrowser
     ],
     exports: [
       ClientAppComponent,

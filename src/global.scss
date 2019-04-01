@@ -27,5 +27,33 @@ ion-content{
 }
 
  ion-card{
-     --background:#fdfdfd !important;
+     --background:rgba(247, 247, 247, 0.761) !important;
  }
+
+ .widget{
+    color: #fff;
+    background-size: auto 80%;
+    background-position: 10px 10px;
+    background-blend-mode: difference;
+    background-repeat: no-repeat;
+ }
+ .widget.orders.closed{
+    background-color:rgba(213, 69, 110, 0.8) !important;
+    background-image: url('assets/icon/order.png') !important;
+}
+.widget.orders.opend{
+    background-color:rgba(241, 142, 12, 0.8) !important;
+    background-image: url('assets/icon/order.png')!important;
+}
+.widget.devices{
+    background-color:rgba(57, 126, 230, 0.8) !important;
+    background-image: url('assets/icon/product.png')!important;
+}
+ion-slides.homeslider{
+    width: 100%;
+    height: 180px;
+    ion-slide{
+        background-size:100% 100%; 
+        background-repeat: no-repeat;
+    }
+}

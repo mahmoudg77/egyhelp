@@ -1,3 +1,4 @@
+import { ListItemSkeletonComponentModule } from './../../components/list-item-skeleton/list-item-skeleton.component.module';
 import { MyDevicesComponent } from './../../components/my-devices/my-devices.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SelectDevicePage } from './select-device.page';
 import { DevicesComponent } from 'src/app/components/devices/devices.component';
+import { GridIconSkeletonComponentModule } from 'src/app/components/grid-icon-skeleton/grid-icon-skeleton.component.module';
 
 const routes: Routes = [
   {
@@ -16,6 +18,11 @@ const routes: Routes = [
     children:
       [
         {
+          path: '',
+          redirectTo: 'devices',
+          pathMatch: 'full'
+        },
+        {
           path: 'devices',
           component:DevicesComponent
         },
@@ -23,19 +30,14 @@ const routes: Routes = [
           path: 'my-devices',
          component:MyDevicesComponent
         },
-        
-        {
-          path: '',
-          redirectTo: '/select-device/devices',
-          pathMatch: 'full'
-        }
       ]
+      
   },
   {
-    path: '',
-    redirectTo: '/select-device/devices',
+    path: 'select-device',
+    redirectTo: 'devices',
     pathMatch: 'full'
-  }
+  },
 ];
 
 
@@ -44,7 +46,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    GridIconSkeletonComponentModule,
+    ListItemSkeletonComponentModule
   ],
   declarations: [
     SelectDevicePage,

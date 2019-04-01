@@ -1,0 +1,6 @@
+
+<app-order-card *ngFor="let ord of myOrders" [ord]="ord"></app-order-card>
+
+<div *ngIf="!myOrders" class="ion-padding custom-skeleton">
+  <app-order-skeleton-card *ngFor="let n of [1,2,3,4,5,6]"></app-order-skeleton-card>
+</div>

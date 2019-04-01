@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/client/my-orders"></ion-back-button>
+        </ion-buttons>
+    <ion-title>تفاصيل الأوردر</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  
+    <section id="cd-timeline" class="cd-container">
+        <div *ngFor="let dat of dats">
+          <div class="cd-timeline-block">
+            <div class="cd-timeline-icon royal">
+              <!-- <i class="ion-image timelineIcon" ng-if="(dat.type=='picture')"></i>
+              <i class="ion-ios-videocam timelineIcon" ng-if="activity.type=='video' "></i>
+              <i class="ion-location timelineIcon" ng-if="activity.type=='location'"></i> -->
+              {{dat.DOING_DATE | date: "d"}}<br/>
+              {{dat.DOING_DATE | date: "MMM"}}
+
+              <!-- <i class="ion-android-textsms timelineIcon" ></i> -->
+            </div>
+            <!-- cd-timeline-img -->
+            <div class="cd-timeline-content royal">
+              
+              <!-- <h5 class="marginBottom0 marginTop0">{{dat.CUSTOMER_REPORT}}</h5> -->
+              <!-- <p class="marginTop5 cd-author"> <ion-icon  name="time"></ion-icon> </p> -->
+              <ion-list>
+                <ion-item>
+                  <ion-label>المكان : {{dat.TYP_ORDER_PLC_NAM}}</ion-label>
+                </ion-item>
+                <ion-item>
+                  <ion-label>الحالة :{{dat.TYP_ORDER_CASE_NAM}}</ion-label>
+                </ion-item>
+                <ion-item>
+                    <ion-label>التقرير :{{dat.CUSTOMER_REPORT}}</ion-label>
+                  </ion-item>
+                <ion-item>
+                  <p class="timelineText">
+                    {{dat.NOTES}}
+                  </p>
+                </ion-item>
+              </ion-list>
+            </div>
+          </div>
+        </div>
+      </section>
+</ion-content>

@@ -1,3 +1,4 @@
+import { apiError } from './../../services/dal/api-result';
 import { LookupsService } from './../../services/bll/lookups.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoadingService } from './../../services/loading.service';
@@ -12,7 +13,7 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./new-order.page.scss'],
 })
 export class NewOrderPage implements OnInit {
-    form:FormGroup
+  form:FormGroup;
   MyDevices: any[];
   orderData: any;
   DeviceTypes: any;
@@ -28,7 +29,7 @@ export class NewOrderPage implements OnInit {
               ) { 
 
                 if(auth.getUser()==null) {
-                  router.navigateByUrl("/edit-profile");
+                  router.navigateByUrl("/client/edit-profile");
                   return;
                 }
               
@@ -90,12 +91,12 @@ export class NewOrderPage implements OnInit {
     this.order.saveOrder(this.orderData,
       next=>{
         if(next==true){
-          this.router.navigateByUrl("/client/home");
+          this.router.navigateByUrl("/client/order-success");
           this.loader.dismiss();
         }
       },
-      error=>{
-        alert(error);
+      (error:apiError)=>{
+        alert(error.message);
         this.loader.dismiss();
       })
   }
@@ -103,13 +104,7 @@ export class NewOrderPage implements OnInit {
   cancel(){
     this.router.navigateByUrl("/client/home");
   }
-  parsDeviceID(ID:string){
-      const ids=ID.split("-");
-
-      this.form.controls['DeviceTypeID'].setValue(ids[0]);
-      this.form.controls['MarkID'].setValue(ids[1]);
-      this.form.controls['DeviceCode'].setValue(ids[2]);
-  }
+  
   selectTab(i:number){
     this.method=i;
     if(i==2){

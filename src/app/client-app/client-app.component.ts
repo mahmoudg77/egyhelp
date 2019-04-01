@@ -1,7 +1,9 @@
+import { Platform } from '@ionic/angular';
 import { AuthService } from './../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: './client-app',
@@ -11,29 +13,34 @@ import { Router } from '@angular/router';
 export class ClientAppComponent implements OnInit {
     public appPages = [
         {
-          title: 'الرئيسية',
+          title: 'الرئيسيــــة',
           url: '/client/home',
-          icon: 'home'
+          icon: 'home',
+          onClick:url=>{this.openPage(url)}
         },
         {
-          title: 'اوردرات الصيانة',
-          url: '/client/orders',
-          icon: 'filing'
+          title: 'اوردراتــــي',
+          url: '/client/my-orders',
+          icon: 'filing',
+          onClick:url=>{this.openPage(url)}
         },
         {
           title: 'فواتيــــري',
           url: '/client/invoices',
-          icon: 'card'
+          icon: 'card',
+          onClick:url=>{this.openPage(url)}
         },
         {
           title: 'الموقع الإلكتروني',
-          url: '/client/website',
-          icon: 'planet'
+          url: 'http://eldawlia-egy.blogspot.com/',
+          icon: 'planet',
+          onClick:url=>{this.openWebSite(url)}
         },
         {
-          title: 'تعليمات',
-          url: '/client/help',
-          icon: 'help-circle'
+          title: 'تعليمــــات',
+          url: 'http://eldawlia-egy.blogspot.com/2012/07/blog-post_8801.html',
+          icon: 'help-circle',
+          onClick:url=>{this.openWebSite(url)}
         }
       ];
 
@@ -51,7 +58,9 @@ export class ClientAppComponent implements OnInit {
     constructor(
         private statusBar: StatusBar,
         private auth:AuthService,
-        private router:Router
+        private router:Router,
+        private inappbrowser:InAppBrowser,
+        private platform:Platform
     ){
 
     }
@@ -59,5 +68,16 @@ export class ClientAppComponent implements OnInit {
       this.auth.logout(next=>{
         this.router.navigateByUrl("/home");
       })
+
+    }
+    openWebSite(url:string){
+      if(this.platform.is("android")||this.platform.is("ios")){
+        this.inappbrowser.create(url,"_self").show();
+      }else{
+        window.open(url,"_self");
+      }
+    }
+    openPage(url:string){
+      this.router.navigateByUrl(url);
     }
 }

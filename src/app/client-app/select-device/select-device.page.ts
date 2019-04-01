@@ -1,4 +1,8 @@
+import { apiError } from './../../services/dal/api-result';
+import { LoadingService } from './../../services/loading.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-select-device',
@@ -7,9 +11,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectDevicePage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth:AuthService,
+    private router:Router,
+    private loading:LoadingService
+    ) { }
 
   ngOnInit() {
+    this.auth.checkLogin(
+      next=>{
+        // this.router.navigateByUrl("/client/home");
+        this.loading.dismiss();
+      },
+      (error:apiError)=>{
+        this.loading.dismiss();
+        
+        this.router.navigateByUrl("/home");
+      })
   }
 
 }

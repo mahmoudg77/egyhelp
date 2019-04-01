@@ -1,0 +1,27 @@
+
+<ion-card (click)="openOrderDetails()">
+  <div class="order-status" [class.order-waiting]="ord.CompState==0"  [class.order-closed]="ord.CompState==1"></div>
+    <ion-card-header>
+      <ion-card-title>{{ord.DeviceName}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="4">
+                <ion-img src="{{env.apiUrl}}/Content/imgs/devices/{{ord.TYP_Devices_ID}}.png"  alt=""></ion-img>
+            </ion-col>
+            <ion-col size="8">
+              <ion-grid fixed>
+                <ion-row>
+                  <ion-col size="12"> {{(ord.TYP_ORDER_ID==1)?"جديد":"مرتجع"}} <ion-icon  name="time"></ion-icon> {{ord.COMPLAINT_DATE|date}}</ion-col>
+                  <ion-col size="12"> {{ord.COMPLAINT_DATA}}</ion-col>
+                </ion-row>
+              </ion-grid>
+               
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        
+    </ion-card-content>
+</ion-card>
+ 

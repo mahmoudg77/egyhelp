@@ -4,57 +4,66 @@
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>
-            Home
+            الرئيسية
           </ion-title>
         </ion-toolbar>
       </ion-header>
       
       <ion-content>
-          <ion-card *ngFor="let ord of myOrders">
-            <div class="order-status" [class.order-waiting]="ord.CompState==0"  [class.order-closed]="ord.CompState==1"></div>
-              <ion-card-header>
-                <ion-card-title>{{ord.DeviceName}}</ion-card-title>
-                <ion-card-subtitle>
-                  
-                  {{ord.COMPLAINT_DATA}}</ion-card-subtitle>
-                </ion-card-header>
-                <ion-card-content>
-                  <ion-grid fixed>
-                    <ion-row>
-                      <ion-col size="6">تاريخ الطلب</ion-col>
-                      <ion-col size="6">{{ord.ORDER_DATE|date}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                      <ion-col size="6">اخر شكوى</ion-col>
-                      <ion-col size="6">{{ord.COMPLAINT_DATE|date}}</ion-col>
-                    </ion-row>
-                  </ion-grid>
-              </ion-card-content>
-          </ion-card>
-
-          <div *ngIf="!myOrders" class="ion-padding custom-skeleton">
-          <ion-card *ngFor="let n of [1,2,3,4,5,6]">
-              <div class="order-status" ><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></div>
-                <ion-card-header>
-                  <ion-card-title><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-card-title>
-                  <ion-card-subtitle><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-card-subtitle>
-                  </ion-card-header>
-                  <ion-card-content>
-                    <ion-grid fixed>
-                      <ion-row>
-                        <ion-col size="6"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
-                        <ion-col size="6"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
-                      </ion-row>
-                      <ion-row>
-                        <ion-col size="6"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
-                        <ion-col size="6"><ion-skeleton-text animated style="width: 100%"></ion-skeleton-text></ion-col>
-                      </ion-row>
-                    </ion-grid>
-                </ion-card-content>
-            </ion-card>
-          </div>
-
-
-         
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="12" >
+                  <ion-slides pager="true" options="slideOpts" class="homeslider">
+                    <ion-slide *ngFor="let slide of slides" [ngStyle]="{'background-image':'url('+env.apiUrl+slide + ')'}">
+                        <!-- <ion-img [src]="env.apiUrl+slide"></ion-img> -->
+                    </ion-slide>
+                  </ion-slides>
+            </ion-col>
+            <ion-col size="12">
+                <ion-card class="widget orders opend">
+                    <ion-card-content>
+                      <ion-grid fixed>
+                        <ion-row>
+                          <ion-col size="8"><h2>طلبات في الإنتظار</h2></ion-col>
+                          <ion-col size="4"><h2>{{data.opendorders}}</h2></ion-col>
+                        </ion-row>
+                      </ion-grid>
+                       
+                    </ion-card-content>
+                  </ion-card>
+                   
+                  <ion-card class="widget orders closed">
+                      <ion-card-content>
+                        <ion-grid fixed>
+                          <ion-row>
+                            <ion-col size="8"><h2>طلبات مغلقة</h2></ion-col>
+                            <ion-col size="4"><h2>{{data.closedorders}}</h2></ion-col>
+                          </ion-row>
+                        </ion-grid>
+                         
+                      </ion-card-content>
+                    </ion-card>
+                  <ion-card class="widget devices">
+                     
+                      <ion-card-content>
+                        <ion-grid fixed>
+                          <ion-row>
+                            <ion-col size="8"><h2>اجهزتي</h2></ion-col>
+                            <ion-col size="4"><h2> {{data.devices}}</h2></ion-col>
+                          </ion-row>
+                        </ion-grid>
+                         
+                      </ion-card-content>
+                    </ion-card>
+          
+          
+                    <!-- <ion-button expand="full" (click)="newOrder()" color="primary">
+                      <ion-icon slot="start" name="add"></ion-icon>
+                      تسجيل طلب صيانة 
+                    </ion-button> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+       
       </ion-content>
       

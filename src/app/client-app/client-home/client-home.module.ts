@@ -1,3 +1,4 @@
+import { MyOrdersComponentModule } from './../../components/my-orders/my-orders.component.module';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
@@ -14,7 +15,7 @@ import { RouterModule } from '@angular/router';
         FormsModule,
         RouterModule,
         IonicModule.forRoot(),
-
+        MyOrdersComponentModule
         
     ],
     declarations: [

@@ -4,3 +4,7 @@ export class apiResult{
     message:string;
     data:any;
 }
+export class apiError{
+    code:number;
+    message:string;
+}

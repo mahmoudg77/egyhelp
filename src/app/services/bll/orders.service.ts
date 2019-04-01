@@ -18,5 +18,9 @@ export class OrdersService {
     this.api.postRequest("/Order/Create",order,data=>{if(next)next(data);},err=>{if(error)error(err);});
 
    }
+ 
+   getOrderDetails(id:number,next:any=null,error:any=null,){
+     this.api.getRequest("/Order/OrderDetails?ID="+id,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+   }
    
 }

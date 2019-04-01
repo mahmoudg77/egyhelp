@@ -4,6 +4,7 @@ import { LoadingService } from 'src/app/services/loading.service';
 import { AuthService } from './../../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { apiError } from 'src/app/services/dal/api-result';
 
 @Component({
   selector: 'app-edit-profile',
@@ -66,8 +67,8 @@ export class EditProfilePage implements OnInit {
         this.auth.setUser(next);
         this.router.navigateByUrl("/new-order");
       },
-      error=>{
-        alert(error);
+      (error:apiError)=>{
+        alert(error.message);
       })
   }
 }

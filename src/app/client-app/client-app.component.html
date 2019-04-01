@@ -11,7 +11,7 @@
       <ion-content>
         <ion-list>
           <ion-menu-toggle auto-hide="false"  >
-            <ion-item [routerDirection]="'root'"  *ngFor="let p of appPages" [routerLink]="[p.url]">
+            <ion-item *ngFor="let p of appPages"  (click)="[p.onClick(p.url)]">
               <ion-icon slot="start" [name]="p.icon" color="primary"></ion-icon>
               <ion-label color="primary">
                 {{p.title}}
@@ -34,7 +34,7 @@
 
   </ion-split-pane>
 
-    <ion-fab-button [routerDirection]="'root'" routerLink="/select-device">
+    <ion-fab-button [routerDirection]="'root'" routerLink="/client/select-device">
       <ion-icon name="add"  ></ion-icon>
     </ion-fab-button>
  

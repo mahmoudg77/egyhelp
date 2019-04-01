@@ -27,10 +27,7 @@ const routes: Routes = [
   { path: 'login-client', component:LoginClientPage },
   { path: 'login-user', component:LoginUserPage },
   { path: 'check', loadChildren: './check/check.module#CheckPageModule' },
-  { path: 'new-order', loadChildren: './client-app/new-order/new-order.module#NewOrderPageModule' },
-  { path: 'edit-profile', loadChildren: './client-app/edit-profile/edit-profile.module#EditProfilePageModule' },
-  { path: 'select-device', loadChildren: './client-app/select-device/select-device.module#SelectDevicePageModule' },
-
+  
   // {
   //   path: 'list',
   //   loadChildren: './list/list.module#ListPageModule'

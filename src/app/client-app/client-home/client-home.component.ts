@@ -1,9 +1,11 @@
+import { CounterService } from './../../services/bll/counter.service';
 import { LoadingService } from './../../services/loading.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/bll/orders.service';
-import { ToastController } from '@ionic/angular';
+import { ToastController, IonSlides } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: './client-home',
@@ -11,38 +13,33 @@ import { ToastController } from '@ionic/angular';
     styleUrls: ['./client-home.component.scss']
 })
 export class ClientHomeComponent implements OnInit {
-    idToken: any;
-    myOrders:any[];
+    data:any={};
+    slides:string[]=[
+        '/content/imgs/slider/1.jpg',
+        '/content/imgs/slider/2.jpg',
+        '/content/imgs/slider/3.jpg'
+    ];
+    slideOpts = {
+        effect: 'flip'
+      };
+    env=environment;
+
+    @ViewChild(IonSlides) slider:IonSlides;
     ngOnInit(): void {
-        this.statusBar.styleDefault();
-        // this.route.queryParams.subscribe(params=>{
-        //     this.idToken=params['idToken'];
-        // })
-        this.getMyOrders();
+       this.counter.getClientCounters(
+           next=>{
+                this.data=next;
+           }
+       )
 
+       this.slider.startAutoplay() ;
     }
-    constructor(
-        private statusBar: StatusBar,
-        private route:ActivatedRoute,
-        private Orders:OrdersService,
-        private toast:ToastController,
-        private loader:LoadingService,
-    ){
+
+    constructor(private counter:CounterService,private router:Router){
 
     }
 
-    getMyOrders(){
-        //this.loader.present("")
-        this.Orders.getMyOrders(next=>{
-            this.myOrders=next;
-            //this.loader.dismiss();
-        },
-        error=>{
-            this.toast.create({message:error,duration:3});
-            //this.loader.dismiss();
-        })
-    }
-    addnew(){
-        this.toast.create({message:"Add new Order"});
+    newOrder(){
+        this.router.navigateByUrl("/client/select-device");
     }
 }
