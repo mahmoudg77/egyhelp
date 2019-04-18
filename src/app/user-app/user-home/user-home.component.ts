@@ -8,11 +8,11 @@ import { ToastController, IonSlides } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
-    selector: 'client-home',
-    templateUrl: './client-home.component.html',
-    styleUrls: ['./client-home.component.scss']
+    selector: 'user-home',
+    templateUrl: './user-home.component.html',
+    styleUrls: ['./user-home.component.scss']
 })
-export class ClientHomeComponent implements OnInit {
+export class UserHomeComponent implements OnInit {
     data:any={};
     slides:string[]=[
         '/content/imgs/slider/1.jpg',

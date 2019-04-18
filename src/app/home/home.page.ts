@@ -13,9 +13,10 @@ export class HomePage implements OnInit {
       this.statusBar.styleDefault();
       this.statusBar.isVisible=true;
 
+      localStorage.clear();
   }
   constructor(
-      private statusBar: StatusBar,
+      private statusBar: StatusBar
   ){
 
   }

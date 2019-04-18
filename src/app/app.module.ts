@@ -1,3 +1,4 @@
+import { StockService } from './services/bll/stock.service';
 import { LookupsService } from './services/bll/lookups.service';
 import { CheckPageModule } from './check/check.module';
 import { UserService } from './services/user.service';
@@ -22,9 +23,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { ClientAppModule } from './client-app/client-app.module';
 import { HttpClientModule } from '@angular/common/http';
 import { OrdersService } from './services/bll/orders.service';
+import { UserAppPageModule } from './user-app/user-app.module';
+import { StockPipePipe } from './pipes/stock-pipe.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, StockPipePipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { OrdersService } from './services/bll/orders.service';
     LoginClientPageModule,
     LoginUserModule,
     HttpClientModule,
-    CheckPageModule
+    CheckPageModule,
+    UserAppPageModule
   ],
   providers: [
     StatusBar,
@@ -48,7 +52,8 @@ import { OrdersService } from './services/bll/orders.service';
     ImageUploaderService,
     UserService,
     LookupsService,
-    OrdersService
+    OrdersService,
+    StockService
   ],
   bootstrap: [AppComponent]
 })

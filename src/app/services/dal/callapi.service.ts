@@ -23,15 +23,17 @@ export class CallapiService {
     if(token==null) return null;
     return Guid.isGuid(token)?token:null;
  }
+ getType() {
+  return localStorage.getItem(environment.typeKey) || null;
+}
   
   getRequest(url:string,pars:any,success_callbak:any,error_callback:any=null){
      let parms=stringify(pars);
-    let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
-    
-     headers= new HttpHeaders({"APP_KEY":environment.apiKey,"AUTH_KEY":this.getToken()});
-    //console.log(url,headers);
-    
-   this.http.get(environment.apiUrl +  url +(parms?"?":"")+parms,{headers})
+     let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
+     if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
+     if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
+
+     this.http.get(environment.apiUrl +  url +(parms?"?":"")+parms,{headers})
                       .pipe(map((result:apiResult)=>{return result}))
                       .subscribe(
                             next=>{
@@ -49,14 +51,10 @@ export class CallapiService {
   }
 
     postRequest(url:string,pars:any,success_callbak:any=null,error_callback:any=null){
-    //var token= this.shared.getToken()||'';
 
     let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
-    
-    //console.log(headers);
-    if(this.getToken()!=null && this.getToken()!=undefined) headers= new HttpHeaders({"APP_KEY":environment.apiKey,"AUTH_KEY":this.getToken()});
-    //console.log(url,headers);
-    //console.log(url);
+    if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
+    if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
 
       this.http.post(environment.apiUrl + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
               .subscribe(

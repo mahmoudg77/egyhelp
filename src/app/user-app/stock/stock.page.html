@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/user/home"></ion-back-button>
+        </ion-buttons>
+    <ion-title>المخزن</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <ion-list>
+     <ion-list-header>
+       <ion-searchbar placeholder="بحث ..." (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+     </ion-list-header>
+     <ion-item *ngFor="let stk of filtered">
+       <ion-grid fixed>
+         <ion-row>
+           <ion-col size="3"><ion-label>{{stk.Balance|number:'1.0-2'}}</ion-label></ion-col>
+           <ion-col size="9"><ion-label>{{stk.PART_NAM}}</ion-label></ion-col>
+         </ion-row>
+       </ion-grid>
+     </ion-item>
+   </ion-list>
+
+   <ion-list *ngIf="!data">
+      <app-list-item-skeleton   *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"></app-list-item-skeleton>
+    </ion-list>
+</ion-content>

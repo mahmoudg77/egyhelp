@@ -41,6 +41,12 @@ export class ClientAppComponent implements OnInit {
           url: 'http://eldawlia-egy.blogspot.com/2012/07/blog-post_8801.html',
           icon: 'help-circle',
           onClick:url=>{this.openWebSite(url)}
+        },
+        {
+          title: 'تسجيل الخروج',
+          url: '',
+          icon: 'log-out',
+          onClick:url=>{this.logout()}
         }
       ];
 

@@ -20,9 +20,15 @@ export class CheckPage implements OnInit {
   ngOnInit(event=null) {
     this.error="";
     this.loading.present("");
+
     this.auth.checkLogin(
       next=>{
-        this.router.navigateByUrl("/client/home");
+        if(this.auth.getType()=="1"){
+          this.router.navigateByUrl("/client/home");
+        }else if(this.auth.getType()=="2"){
+          this.router.navigateByUrl("/user/home");
+        }
+        
         this.loading.dismiss();
         if(event) event.target.complete();
       },
@@ -31,9 +37,6 @@ export class CheckPage implements OnInit {
         if(event) event.target.complete();
         if(error.code==0){
           this.error="لا يوجد انترنت";
-          return;
-        }else if(error.code>1000 && error.code<2000){
-          this.error=error.message;
           return;
         }
         this.router.navigateByUrl("/home");

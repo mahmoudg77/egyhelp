@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { environment } from 'src/environments/environment';
 import { Firebase } from '@ionic-native/firebase/ngx';
+import * as firebase from 'firebase';
 
  
 @Injectable()
@@ -19,6 +20,9 @@ export class AuthService {
     return this.isLogin();
 
   }
+  getType() {
+    return localStorage.getItem(environment.typeKey) || null;
+  }
   getToken() {
     let token=localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
@@ -27,8 +31,12 @@ export class AuthService {
   setToken(value: string) {
     localStorage.setItem(environment.tokenKey,value);
   }
+  setType(value: string) {
+    localStorage.setItem(environment.typeKey,value);
+  }
   clearToken(){
     localStorage.removeItem(environment.tokenKey);
+    localStorage.removeItem(environment.typeKey);
   }
   isLogin() {
     if (this.getToken()!=null && this.getToken()!=undefined) {
@@ -51,6 +59,7 @@ export class AuthService {
       this.call.postRequest("/User/Current","",
       next=>{
         this.setUser(next.account);
+        this.setType(next.type)
         //this.setToken(next.token);
         if(fnNext) fnNext(next);
       },
@@ -79,24 +88,39 @@ export class AuthService {
           }
         )
       })
+
+     
     
   }
     
+  userLogin(username:string,password:string,fnNext:any=null,fnError:any=null){
+         this.call.postRequest("/User/UserLogin",{"username":username,"password":password},
+        next=>{
+          this.setUser(next.account);
+          this.setToken(next.token);
+          this.setType(next.type);
+          if(fnNext!=null) fnNext(next);
+        },
+        error=>{
+          this.setToken(null);
+          this.setType(null);
+          this.setUser(null);
+          if(fnError!=null) fnError(error);
+        }
+      )
+   }
 
     logout(fnNext:any=null,fnError:any=null) {
       this.call.getRequest("/User/Logout","",
               next => { 
-                          //this.notifyService.stop();
                           this.setUser(null);
                           this.clearToken();
                           if(fnNext) fnNext(next);
+                          firebase.auth().signOut();
                       },
               error=>
                       {
-                        //this.notifyService.stop();
-                        // this.setUser(null);
-                        // this.clearToken();
-                        //this.route.navigate(['/']);
+                       
                         if(fnError) fnError(error);
                     }
           );

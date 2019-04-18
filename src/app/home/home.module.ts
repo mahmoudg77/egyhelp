@@ -12,6 +12,7 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     RouterModule
+    
   ],
   declarations: [HomePage]
 })

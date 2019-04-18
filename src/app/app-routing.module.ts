@@ -24,9 +24,12 @@ const routes: Routes = [
     path: 'client',
     loadChildren: './client-app/client-app.module#ClientAppModule'
   },
+  { path: 'user', loadChildren: './user-app/user-app.module#UserAppPageModule' },
+
+
   { path: 'login-client', component:LoginClientPage },
   { path: 'login-user', component:LoginUserPage },
-  { path: 'check', loadChildren: './check/check.module#CheckPageModule' },
+  // { path: 'check', loadChildren: './check/check.module#CheckPageModule' },
   
   // {
   //   path: 'list',

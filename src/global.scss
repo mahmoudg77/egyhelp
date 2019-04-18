@@ -57,3 +57,9 @@ ion-slides.homeslider{
         background-repeat: no-repeat;
     }
 }
+
+ion-item,ion-input{
+	//border: rgba(0, 0, 0, 0);
+	--background-color: #00000000 !important;
+	//color: white; 
+}
