@@ -31,8 +31,11 @@ const routes: Routes = [
       // { path: 'website', loadChildren: './website/website.module#WebsitePageModule' },
       // { path: 'order-details', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
 
-      { path: 'stock', loadChildren: './stock/stock.module#StockPageModule' }
+      { path: 'stock', loadChildren: './stock/stock.module#StockPageModule' },
+      { path: 'orders', loadChildren: './user-orders/user-orders.module#UserOrdersPageModule' },
+      { path: 'order-search', loadChildren: './order-search/order-search.module#OrderSearchPageModule' },
 
+      { path: 'success', loadChildren: './order-success/order-success.module#SuccessPageModule' },
     ]
   },
 ];

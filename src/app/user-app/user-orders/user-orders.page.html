@@ -1,0 +1,114 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/user/home"></ion-back-button>
+          <!-- <ion-menu-button ></ion-menu-button> -->
+      </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onSearchClick()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card *ngFor="let ord of data">
+  <ion-card-header>
+    <ion-card-title>{{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}</ion-card-title>
+    <ion-card-subtitle>{{ord.NAME}} (<a href="tel:{{ord.MOBIL1}}">{{ord.MOBIL}}</a> {{ord.MOBIL1!="0"?"-":""}} <a href="tel:{{ord.MOBIL1}}" *ngIf="ord.MOBIL1!='0'">{{ord.MOBIL1}}</a>)</ion-card-subtitle>
+    <ion-card-subtitle>{{ord.ADDRESS}}</ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content  (click)="openOrderHistory(ord.ORDER_NO)">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="4"><strong>تاريخ الشكوى</strong></ion-col>
+        <ion-col size="8">{{ord.COMPLAINT_DATE|date:'dd MMM yyyy'}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4"><strong>رقم الطلب</strong> </ion-col>
+        <ion-col size="8">{{ord.ORDER_NO}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4"><strong>رقم الشكوى</strong></ion-col>
+        <ion-col size="8">{{ord.COMPLAINT_NO}}</ion-col>
+      </ion-row>
+     
+      <ion-row>
+        <ion-col size="4"><strong> الشكوى</strong></ion-col>
+        <ion-col size="8">{{ord.COMPLAINT_DATA}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4"><strong>المتابعة</strong></ion-col>
+        <ion-col size="8">{{ord.TYP_ORDER_FOLL_NAM}}</ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="4"><strong>ملاحظات</strong></ion-col>
+        <ion-col size="8">{{ord.NOTES}}</ion-col>
+      </ion-row>
+      
+    </ion-grid>
+   
+  </ion-card-content>
+</ion-card>
+
+
+<ion-card *ngIf="!data">
+    <ion-card-header>
+      <ion-card-title><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-card-title>
+      <ion-card-subtitle><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="4"><strong>تاريخ الشكوى</strong></ion-col>
+          <ion-col size="8"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>رقم الطلب</strong> </ion-col>
+          <ion-col size="8"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6"><strong>رقم الشكوى</strong></ion-col>
+          <ion-col size="6"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+       
+        <ion-row>
+          <ion-col size="4"><strong> الشكوى</strong></ion-col>
+          <ion-col size="8"><ion-skeleton-text animated ="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>المتابعة</strong></ion-col>
+          <ion-col size="8"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>ملاحظات</strong></ion-col>
+          <ion-col size="8"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="4"><strong>العنوان</strong></ion-col>
+          <ion-col size="8"><ion-skeleton-text animated width="100%"></ion-skeleton-text></ion-col>
+        </ion-row>
+      </ion-grid>
+     
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+<!-- {
+  "ORDER_NO": 73,
+  "COMPLAINT_NO": 1,
+  "DOING_DATE": "2018-10-20T00:00:00",
+  "NAME": "عبد الرحمن محمد ",
+  "TYP_Devices_NAM": "سخان",
+  "MARK_NAM": "كريازى",
+  "DEV_CODE": 2,
+  "TYP_ORDER_FOLL_NAM": "جديد",
+  "COMPLAINT_DATA": "فاصل / 100ك",
+  "NOTES": "100 كشف ",
+  "IDD": 86,
+  "CLOSE_TECH": "0",
+  "CUSTOMER_REPORT": "",
+  "TYP_ORDER_FOLL_ID": 1,
+  "TYP_ORDER_CASE_ID": 1
+}, -->

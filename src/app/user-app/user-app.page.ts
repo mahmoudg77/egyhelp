@@ -20,13 +20,13 @@ export class UserAppPage implements OnInit {
     },
     {
       title: 'اوردرات اليوم',
-      url: '/user/new-orders',
+      url: '/user/orders/new',
       icon: 'filing',
       onClick:url=>{this.openPage(url)}
     },
     {
       title: 'جميع الأوردرات',
-      url: '/user/new-orders',
+      url: '/user/orders/all',
       icon: 'filing',
       onClick:url=>{this.openPage(url)}
     },

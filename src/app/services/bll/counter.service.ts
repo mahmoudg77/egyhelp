@@ -11,5 +11,8 @@ export class CounterService {
   getClientCounters(next:any=null,error:any=null){
     this.api.getRequest("/Counter/Client","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
+  getUserCounters(next:any=null,error:any=null){
+    this.api.getRequest("/Counter/User","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
 
 }

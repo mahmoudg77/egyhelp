@@ -26,7 +26,7 @@ export class UserHomeComponent implements OnInit {
 
     @ViewChild(IonSlides) slider:IonSlides;
     ngOnInit(): void {
-       this.counter.getClientCounters(
+       this.counter.getUserCounters(
            next=>{
                 this.data=next;
            }
@@ -39,7 +39,5 @@ export class UserHomeComponent implements OnInit {
 
     }
 
-    newOrder(){
-        this.router.navigateByUrl("/client/select-device");
-    }
+    
 }

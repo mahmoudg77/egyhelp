@@ -25,4 +25,10 @@ export class LookupsService {
   getMyDevices(next:any=null,error:any=null){
     this.api.getRequest("/Lookup/MyDevices","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
+  getFollowStates(next:any=null,error:any=null){
+    this.api.getRequest("/Lookup/FollowStates","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+  getOrderStates(next:any=null,error:any=null){
+    this.api.getRequest("/Lookup/OrderStates","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
 }

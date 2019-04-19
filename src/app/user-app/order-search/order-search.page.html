@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/user/orders/all"></ion-back-button>
+        </ion-buttons>
+    <ion-title>بحث</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<form action="/user/orders/search" method="GET" (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="fixed">اسم العميل</ion-label>
+    <ion-input name="name" [(ngModel)]="data.name" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">من تاريخ </ion-label>
+    <ion-input  name="date_to" [(ngModel)]="data.date_from" type="date"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">الى تاريخ </ion-label>
+    <ion-input  name="date_from"  [(ngModel)]="data.date_to" type="date"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">حالة الطلب</ion-label>
+    <ion-select multiple="false"  [(ngModel)]="data.state" name="state" placeholder="حالة الطلب">
+      <ion-select-option selected [value]="">الكل</ion-select-option>
+      <ion-select-option [value]="1">المغلقة</ion-select-option>
+      <ion-select-option [value]="0">المفتوحة</ion-select-option>
+    </ion-select>
+  </ion-item>
+ 
+  <ion-button block color="primary" type="submit" >
+    بحـث
+  </ion-button>
+</form>
+</ion-content>

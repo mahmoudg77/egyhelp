@@ -40,7 +40,7 @@ export class LoginUserPage implements OnInit {
     },
     error=>{
       this.loadingService.dismiss();
-      this.shared.error(error);
+      this.shared.error(error.message);
     }
     )
 
