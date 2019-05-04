@@ -96,7 +96,7 @@ export class NewOrderPage implements OnInit {
         }
       },
       (error:apiError)=>{
-        alert(error.message);
+        //alert(error.message);
         this.loader.dismiss();
       })
   }

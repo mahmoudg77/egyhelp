@@ -1,9 +1,11 @@
+import { AppSettingsService } from './../services/bll/app-settings.service';
 import { Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-app',
@@ -26,7 +28,7 @@ export class UserAppPage implements OnInit {
     },
     {
       title: 'جميع الأوردرات',
-      url: '/user/orders/all',
+      url: '/user/order-search',
       icon: 'filing',
       onClick:url=>{this.openPage(url)}
     },
@@ -37,31 +39,36 @@ export class UserAppPage implements OnInit {
       onClick:url=>{this.openPage(url)}
     },
     {
+      title: 'البيانات الشخصية',
+      url: '/user/profile',
+      icon: 'contact',
+      onClick:url=>{this.openPage(url)}
+    },
+    {
       title: 'الموقع الإلكتروني',
-      url: 'http://eldawlia-egy.blogspot.com/',
       icon: 'planet',
-      onClick:url=>{this.openWebSite(url)}
+      onClick:url=>{this.openWebSite(this.websiteUrl)}
     },
     {
       title: 'تعليمــــات',
-      url: 'http://eldawlia-egy.blogspot.com/2012/07/blog-post_8801.html',
       icon: 'help-circle',
-      onClick:url=>{this.openWebSite(url)}
+      onClick:url=>{this.openWebSite(this.helpUrl)}
     },
     {
       title: 'تسجيل الخروج',
-      url: '',
       icon: 'log-out',
       onClick:url=>{this.logout()}
     }
   ];
-
+  websiteUrl:string;
+  helpUrl: string;
   constructor(
-    private statusBar: StatusBar,
+    // private statusBar: StatusBar,
     private auth:AuthService,
     private router:Router,
     private inappbrowser:InAppBrowser,
-    private platform:Platform
+    private platform:Platform,
+    private settings:AppSettingsService
 ){
 
 }
@@ -73,6 +80,33 @@ logout(){
 }
 
   ngOnInit() {
+    // this.statusBar.styleDefault();
+    // this.statusBar.isVisible=true;
+
+    // // let status bar overlay webview
+    // this.statusBar.styleLightContent();
+
+    //   // set status bar to white
+    // this.statusBar.backgroundColorByName("primary");
+
+    // this.router.events.pipe(filter(event => event instanceof NavigationStart)).subscribe(event => {
+        
+    //   if(!this.auth.getUser()){
+    //       this.auth.checkLogin();
+    //     }
+       
+      
+    // });
+
+        this.settings.getSettings("web_site_url",'http://19089-co.site',
+         next=>{
+                this.websiteUrl =next;
+         });
+         this.settings.getSettings("help_page_url",'http://19089-co.site',
+         next=>{
+                this.helpUrl =next;
+         });
+     
   }
 
 

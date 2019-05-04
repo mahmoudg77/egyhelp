@@ -14,9 +14,14 @@ export const environment = {
   },
   tokenKey:"x-aldawlia-token-key",
   typeKey:"x-aldawlia-type-key",
+  database:{
+    name: '__19089db',
+    driverOrder: ['indexeddb', 'sqlite', 'websql']
+  },
   apiKey:"7F53sB7WZEMXjuMju4vhj8DzvpLNtUuGGTE3CWREk9CTGXSET5qPUgFD7XRpDkozyrahw7bxVWZqHrc4",
   //apiUrl:"http://localhost:61852"
    apiUrl:"https://dawlia.nearyouweb.com"
+   //apiUrl:"http://41.32.248.67"
 };
 
 /*

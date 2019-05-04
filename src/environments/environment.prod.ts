@@ -9,6 +9,8 @@ export const environment = {
     messagingSenderId: "862734630161"
   },
   tokenKey:"x-aldawlia-token-key",
+  typeKey:"x-aldawlia-type-key",
   apiKey:"7F53sB7WZEMXjuMju4vhj8DzvpLNtUuGGTE3CWREk9CTGXSET5qPUgFD7XRpDkozyrahw7bxVWZqHrc4",
   apiUrl:"https://dawlia.nearyouweb.com"
+  //apiUrl:"http://41.32.248.67"
 };

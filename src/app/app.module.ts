@@ -25,6 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrdersService } from './services/bll/orders.service';
 import { UserAppPageModule } from './user-app/user-app.module';
 import { StockPipePipe } from './pipes/stock-pipe.pipe';
+import { IonicStorageModule } from '@ionic/storage';
+import { environment } from 'src/environments/environment';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, StockPipePipe],
@@ -39,7 +42,8 @@ import { StockPipePipe } from './pipes/stock-pipe.pipe';
     LoginUserModule,
     HttpClientModule,
     CheckPageModule,
-    UserAppPageModule
+    UserAppPageModule,
+    IonicStorageModule.forRoot(environment.database)
   ],
   providers: [
     StatusBar,
@@ -53,7 +57,9 @@ import { StockPipePipe } from './pipes/stock-pipe.pipe';
     UserService,
     LookupsService,
     OrdersService,
-    StockService
+    StockService,
+    AsyncPipe,
+    
   ],
   bootstrap: [AppComponent]
 })

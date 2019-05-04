@@ -1,3 +1,7 @@
+import { HistoryServeComponent } from './history-serve/history-serve.component';
+import { HistoryStockComponent } from './history-stock/history-stock.component';
+import { HistoryFinComponent } from './history-fin/history-fin.component';
+import { HistoryTecComponent } from './history-tec/history-tec.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +19,14 @@ const routes: Routes = [
       
       {
         path: ':id',
-        component:OrderHistoryPage
+        component:OrderHistoryPage,
+        children:[
+          {path:'tech',component:HistoryTecComponent},
+          {path:'financ',component:HistoryFinComponent},
+          {path:'stock',component:HistoryStockComponent},
+          {path:'serve',component:HistoryServeComponent},
+          {path:'',redirectTo:'tech'},
+        ]
       },
     ]
   }
@@ -28,6 +39,10 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [OrderHistoryPage]
+  declarations: [OrderHistoryPage,
+  HistoryFinComponent,
+HistoryServeComponent,
+HistoryStockComponent,
+HistoryTecComponent]
 })
 export class OrderHistoryPageModule {}

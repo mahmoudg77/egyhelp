@@ -30,27 +30,32 @@ export class AppComponent  {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.statusBar.isVisible=true;
-
-     
+      
       
       firebase.initializeApp(environment.firebase);
       this.splashScreen.hide();
-
+      
       this.fb.onNotificationOpen()
-        .subscribe(data =>{
-          
-          this.router.navigateByUrl(data.route);
-        }
+      .subscribe(data =>{
+        
+        this.router.navigateByUrl(data.route);
+      }
       );
-
+      
       this.fb.onTokenRefresh()
-        .subscribe((token: string) => {
-          this.auth.saveNewDeviceID(token);
-        });
+      .subscribe((token: string) => {
+        this.auth.saveNewDeviceID(token);
       });
+    });
+    
+    this.statusBar.styleDefault();
+    this.statusBar.isVisible=true;
 
+    // let status bar overlay webview
+    this.statusBar.styleLightContent();
+
+      // set status bar to white
+    //this.statusBar.backgroundColorByName("primary");
    
    
   }

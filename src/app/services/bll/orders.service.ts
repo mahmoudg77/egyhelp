@@ -1,3 +1,4 @@
+import { DataLoaderService } from './../dal/data-loader.service';
 import { CallapiService } from './../dal/callapi.service';
 import { Injectable } from '@angular/core';
 
@@ -10,6 +11,14 @@ export class OrdersService {
 
    }
 
+   public currentOrders={
+      draw : 0,
+      recordsTotal:0,
+      recordsFiltered:0,
+      data:[],
+    };
+
+   
    getMyOrders(next:any=null,error:any=null,){
      this.api.getRequest("/Order/MyOrders","",data=>{if(next)next(data);},err=>{if(error)error(err);});
    }
@@ -28,11 +37,80 @@ export class OrdersService {
    }
    
    getAllOrders(state=null,from="",to="",next:any=null,error:any=null,){
-    this.api.getRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+    this.api.getRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to,"",data=>{
+      
+      if(next){
+        next(data);
+      }
+    
+    },err=>{if(error)error(err);});
   }
-   getCloseOrder(request:any,next:any=null,error:any=null,){
+   closeOrder(request:any,next:any=null,error:any=null,){
     this.api.postRequest("/Order/AddReport",request,data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
+  getMyInvoices(next:any=null,error:any=null,){
+    this.api.getRequest("/Order/Invoices","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+  getInvoicesDetails(OrderNo:number,next:any=null,error:any=null,){
+    this.api.getRequest("/Order/InvoiceDetails/"+OrderNo,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+
+
+  // getCurrentOrders(next:any=null,error:any=null){
+  //   this.api.postRequest("/order/Tech/MyOrders?state=","",
+  //   resp=>{
+  //     if(resp){
+  //         this.currentOrders=resp;
+  //       }
+  //       next(resp);
+  //     },
+  //     err=>{
+  //       if(error)error(err);
+  //     }
+  //   );
+  // }
+
+
+  getMoreOrders(dataLoader:any,state=null,from="",to="",next:any=null,error:any=null){
+    this.api.postRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to,dataLoader,
+    resp=>{
+       
+      
+      //if(resp){
+        // if(dataLoader.draw==0){
+        //   this.currentOrders=resp;
+        // }else{
+        //   resp.data.forEach(itm => {
+        //     this.currentOrders.data.push(itm);
+        //   }); 
+        // }
+        dataLoader.draw++;
+        dataLoader.start=dataLoader.length*dataLoader.draw;
+        if(next)next(resp);
+      //}
+      },
+      err=>{
+        if(error)error(err);
+      }
+    );
+  }
+
+  getOrderFinance(OrderNo:number,next:any=null,error:any=null,){
+    this.api.getRequest("/Order/Finance/"+OrderNo,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+  getOrderStock(OrderNo:number,next:any=null,error:any=null,){
+    this.api.getRequest("/Order/Stock/"+OrderNo,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+  getOrderServes(OrderNo:number,next:any=null,error:any=null,){
+    this.api.getRequest("/Order/Serves/"+OrderNo,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+
+  // getCurrentOrders(){
+  //   return this.storage.get("currentOrders");
+  // }
+  // setCurrentOrders(value){
+  //   return  this.storage.set("currentOrders",value);
+  // }
 
   // {
   //   "Order_No": 15979,

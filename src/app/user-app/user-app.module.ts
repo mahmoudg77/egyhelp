@@ -35,7 +35,9 @@ const routes: Routes = [
       { path: 'orders', loadChildren: './user-orders/user-orders.module#UserOrdersPageModule' },
       { path: 'order-search', loadChildren: './order-search/order-search.module#OrderSearchPageModule' },
 
-      { path: 'success', loadChildren: './order-success/order-success.module#SuccessPageModule' },
+      { path: 'success', loadChildren: './success/success.module#SuccessPageModule' },
+      { path: 'profile', loadChildren: './user-profile/user-profile.module#UserProfilePageModule' },
+    
     ]
   },
 ];

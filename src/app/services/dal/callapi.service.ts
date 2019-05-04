@@ -40,6 +40,8 @@ export class CallapiService {
                             if (next.isSuccess) {
                                 success_callbak(next.data);              
                             } else {
+                              this.softErrorHandling({code:next.code,message:next.message});
+
                               if(error_callback!=undefined)  error_callback(next.message);
                             }
                             },
@@ -62,7 +64,10 @@ export class CallapiService {
                     if (next.isSuccess) {
                       if(success_callbak!=null)success_callbak(next.data);              
                     } else {
+
+                      this.softErrorHandling({code:next.code,message:next.message});
                       if(error_callback!=null) error_callback({code:next.code,message:next.message});
+                      
                     }
                 },
                 error=>{
@@ -85,6 +90,19 @@ export class CallapiService {
         this.shared.error("This option is disbaled now !!");
       }else{
         //this.shared.error(error.message);
+      }
+    }
+    softErrorHandling(error:any){
+      if(error.code==1403){
+        this.route.navigate(['home']);
+      }else if(error.code==1401){
+        this.shared.error("ليس لديك صلاحية!");
+      }else if(error.code==1403){
+        this.route.navigate(['home']);
+      }else if(error.code==1406){
+        this.shared.error("هذه الميزة غير مفعلة الأن !");
+      }else{
+        this.shared.error(error.message);
       }
     }
 

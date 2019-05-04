@@ -1,6 +1,6 @@
 import { OrderHistoryPageModule } from './../order-history/order-history.module';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, AsyncPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -16,10 +16,11 @@ const routes: Routes = [
         redirectTo: 'new',
         pathMatch: 'full'
       },
-      {
-        path: 'new',
-        component:UserOrdersPage
-      },
+      // {
+      //   path: 'new',
+      //   component:UserOrdersPage
+      // },
+      { path: 'new', loadChildren: './../user-current-orders/user-current-orders.module#UserCurrentOrdersPageModule' },
       {
         path: 'all',
         component:UserOrdersPage
@@ -48,6 +49,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     OrderHistoryPageModule
   ],
-  declarations: [UserOrdersPage]
+  declarations: [UserOrdersPage],
+  providers:[
+    AsyncPipe
+  ]
 })
 export class UserOrdersPageModule {}

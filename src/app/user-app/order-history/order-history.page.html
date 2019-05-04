@@ -1,81 +1,38 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button defaultHref="/user/orders/new"></ion-back-button>
+          <ion-back-button></ion-back-button>
           <!-- <ion-menu-button></ion-menu-button> -->
         </ion-buttons>
-    <ion-title>تفاصيل الأوردر</ion-title>
+    <ion-title>
+       الأوردر
+       <span >
+          #{{ORDER_NO}} 
+        </span>
+      </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-      <section id="cd-timeline" class="cd-container">
-        <div *ngFor="let dat of complaints">
-          <div class="cd-timeline-block">
-            <div class="cd-timeline-icon royal">
-              <!-- <i class="ion-image timelineIcon" ng-if="(dat.type=='picture')"></i>
-              <i class="ion-ios-videocam timelineIcon" ng-if="activity.type=='video' "></i>
-              <i class="ion-location timelineIcon" ng-if="activity.type=='location'"></i> -->
-              {{dat.COMPLAINT_DATE | date: "d"}}<br/>
-              {{dat.COMPLAINT_DATE | date: "MMM"}}
 
-              <!-- <i class="ion-android-textsms timelineIcon" ></i> -->
-            </div>
-            <!-- cd-timeline-img -->
-            <div class="cd-timeline-content royal">
-              
-               <h5 class="marginBottom0 marginTop0">الشكوى رقم {{dat.COMPLAINT_NO}}</h5> 
-               <p class="marginTop5 cd-author"><ion-icon  name="time"></ion-icon> {{dat.COMPLAINT_DATE|date:'dd/MM/yyyy'}} </p> 
-              
-              <ion-slides pager="true">
-                <ion-slide *ngFor="let i of orderFilter(dat)">
-                    <form >
-                        <ion-item>
-                          <ion-label position="fixed">تاريخ المتابعة</ion-label>
-                          <ion-input>{{i.DOING_DATE|date:'dd/MM/yyyy'}}</ion-input>
-                        </ion-item>
-                        <ion-item>
-                          <ion-label position="fixed">المكان</ion-label>
-                          <ion-input>{{i.TYP_ORDER_PLC_NAM}}</ion-input>
-                        </ion-item>
-                        <ion-item>
-                          <ion-label position="fixed">الفني</ion-label>
-                          <ion-input>{{i.ENG_NAM}}</ion-input>
-                        </ion-item>
-                        <ion-item>
-                          <ion-label position="fixed">البيان</ion-label>
-                          <ion-input>{{i.NOTES}}</ion-input>
-                        </ion-item>
-                      </form>
-                </ion-slide>
-              </ion-slides>
-               
-            </div>
-          </div>
-        </div>
-      </section>
+    <ion-tabs >
+        <ion-tab-bar slot="top" color="primary">
+          <ion-tab-button tab="tech">
+               الفني 
+          </ion-tab-button>
+          <ion-tab-button tab="stock">
+               المخزن
+          </ion-tab-button>
+          <ion-tab-button tab="serve">
+              الخدمات
+          </ion-tab-button>
+          <ion-tab-button tab="financ">
+              المالي
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs> 
+
+
+      
 </ion-content>
-<!-- {
-  "COMPLAINT_NO": 1,
-  "COMPLAINT_DATE": "2019-02-16T00:00:00",
-  "TYP_ORDER_NAM": "جديد",
-  "DOING_DATE": "2019-02-17T00:00:00",
-  "TYP_ORDER_PLC_NAM": "منزلى",
-  "TYP_ORDER_FOLL_NAM": "جديد",
-  "TYP_ORDER_ACTION_NAM": "تم التشغيل",
-  "TYP_ORDER_CASE_NAM": null,
-  "NOTES": "الاشعال الكشف 100",
-  "ENG_NAM": "ايمن طلبه",
-  "STATUS": "مغلق"
-} -->
 
-<ion-footer >
-    <ion-toolbar>
-      <ion-title>
-          <ion-button expand="full" color="primary" type="button" (click)="onAddReport()">
-              <ion-icon slot="start" name="add"></ion-icon>
-              تسجيل التقرير الفني
-            </ion-button>
-      </ion-title>
-    </ion-toolbar>
-  </ion-footer>

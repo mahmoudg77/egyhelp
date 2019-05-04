@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/client/invoices"></ion-back-button>
+        </ion-buttons>
+    <ion-title>تفاصيل الفاتورة</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list >
+        <ion-item *ngFor="let inv of data" >
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="3">{{inv.Value | number:'1.0-2'}}</ion-col>
+              <ion-col size="5">{{inv.Lable}}</ion-col>
+              <ion-col size="4">{{inv.FIN_DATE|date:'yyyy-MM-dd'}}</ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
+</ion-content>

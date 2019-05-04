@@ -15,7 +15,7 @@ export class StockPage implements OnInit {
     this.stock.getMyStock(
       next=>{
         this.data=next;
-        this.filtered=next;
+        this.filtered=next.filter(itm=>itm.Balance>0);
       },
       err=>{
 
@@ -24,7 +24,7 @@ export class StockPage implements OnInit {
   }
   onSearchChange(event){
     //console.log(event.target.value);
-    this.filtered=this.data.filter(itm=>itm.PART_NAM.indexOf(event.target.value)!==-1);
+    this.filtered=this.data.filter(itm=>itm.PART_NAM.indexOf(event.target.value)!==-1 && itm.Balance>0);
     // console.log(event.value);
     // this.data.forEach(itm=>{
        

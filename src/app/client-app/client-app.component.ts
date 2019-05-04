@@ -1,3 +1,4 @@
+import { AppSettingsService } from './../services/bll/app-settings.service';
 import { Platform } from '@ionic/angular';
 import { AuthService } from './../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -19,6 +20,12 @@ export class ClientAppComponent implements OnInit {
           onClick:url=>{this.openPage(url)}
         },
         {
+          title: 'تسجيل أوردر جديد',
+          url: '/client/select-device',
+          icon: 'add',
+          onClick:url=>{this.openPage(url)}
+        },
+        {
           title: 'اوردراتــــي',
           url: '/client/my-orders',
           icon: 'filing',
@@ -31,42 +38,55 @@ export class ClientAppComponent implements OnInit {
           onClick:url=>{this.openPage(url)}
         },
         {
+          title: 'البيانات الشخصية',
+          url: '/client/profile',
+          icon: 'contact',
+          onClick:url=>{this.openPage(url)}
+        },
+        {
           title: 'الموقع الإلكتروني',
-          url: 'http://eldawlia-egy.blogspot.com/',
           icon: 'planet',
-          onClick:url=>{this.openWebSite(url)}
+          onClick:url=>{this.openWebSite(this.websiteUrl)}
         },
         {
           title: 'تعليمــــات',
-          url: 'http://eldawlia-egy.blogspot.com/2012/07/blog-post_8801.html',
           icon: 'help-circle',
-          onClick:url=>{this.openWebSite(url)}
+          onClick:url=>{this.openWebSite(this.helpUrl)}
         },
         {
           title: 'تسجيل الخروج',
-          url: '',
           icon: 'log-out',
           onClick:url=>{this.logout()}
         }
       ];
+  websiteUrl: string;
+  helpUrl: string;
 
     ngOnInit(): void {
-        this.statusBar.styleDefault();
-        this.statusBar.isVisible=true;
+        // this.statusBar.styleDefault();
+        // this.statusBar.isVisible=true;
 
-        // let status bar overlay webview
-        this.statusBar.styleLightContent();
+        // // let status bar overlay webview
+        // this.statusBar.styleLightContent();
 
-          // set status bar to white
-        this.statusBar.backgroundColorByName("primary");
-
+        //   // set status bar to white
+        // this.statusBar.backgroundColorByName("primary");
+        this.settings.getSettings("web_site_url",'http://19089-co.site',
+         next=>{
+                this.websiteUrl =next;
+         });
+         this.settings.getSettings("help_page_url",'http://19089-co.site',
+         next=>{
+                this.helpUrl =next;
+         });
     }
     constructor(
-        private statusBar: StatusBar,
+        // private statusBar: StatusBar,
         private auth:AuthService,
         private router:Router,
         private inappbrowser:InAppBrowser,
-        private platform:Platform
+        private platform:Platform,
+        private settings:AppSettingsService
     ){
 
     }

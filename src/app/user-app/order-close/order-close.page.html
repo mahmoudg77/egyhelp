@@ -7,22 +7,26 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <ion-card>
+    
+    <ion-card-content>
+       
     <form  (ngSubmit)="onSubmit()">
       <ion-item>
-        <ion-label position="fixed">حالة الأمر</ion-label>
-        <ion-select name="Follow_ID" multiple="false"  [(ngModel)]="data.Follow_ID" name="state" placeholder="حالة الأمر">
-          <ion-select-option *ngFor="let f of follows" [value]="f.ID">{{f.Name}}</ion-select-option>
+        <ion-label position="fixed">المتابعة </ion-label>
+        <ion-select [interfaceOptions]="followActionSheetOptions" interface="action-sheet" okText="موافق" cancelText="خروج من القائمة" name="Follow_ID" multiple="false" (click)="data.OrderCase_ID=defaults.status"  [(ngModel)]="data.Follow_ID" name="Follow_ID" placeholder="المتابعة">
+          <ion-select-option *ngFor="let f of follows"  [value]="f.ID">{{f.Name}}</ion-select-option>
         </ion-select>      
       </ion-item>
       <ion-item>
-        <ion-label position="fixed">المتابعة </ion-label>
-        <ion-select name="OrderCase_ID" multiple="false"  [(ngModel)]="data.OrderCase_ID" name="state" placeholder="المتابعة">
-            <ion-select-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ion-select-option>
+        <ion-label position="fixed">حالة الأمر</ion-label>
+        <ion-select [interfaceOptions]="caseActionSheetOptions" interface="action-sheet" okText="موافق" cancelText="خروج من القائمة" name="OrderCase_ID" multiple="false"  (click)="data.Follow_ID=defaults.follow" [(ngModel)]="data.OrderCase_ID" name="OrderCase_ID" placeholder="حالة الأمر">
+          <ion-select-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ion-select-option>
           </ion-select>   
       </ion-item>
-      <ion-item *ngIf="data.OrderCase_ID==1 || data.OrderCase_ID==7">
-        <ion-label position="fixed">تاريخ المتابعة</ion-label>
+      <ion-item *ngIf="data.Follow_ID==2 || data.Follow_ID==3">
+        <ion-label position="fixed">تاريخ التأجيل</ion-label>
         <ion-input  name="Action_Date" type="date" [(ngModel)]="data.Action_Date"  ></ion-input>
       </ion-item>
       <ion-item>
@@ -37,4 +41,7 @@
         ارسال التقرير
       </ion-button>
     </form>
+    
+  </ion-card-content>
+</ion-card>
 </ion-content>

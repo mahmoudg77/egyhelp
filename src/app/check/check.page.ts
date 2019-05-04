@@ -27,6 +27,8 @@ export class CheckPage implements OnInit {
           this.router.navigateByUrl("/client/home");
         }else if(this.auth.getType()=="2"){
           this.router.navigateByUrl("/user/home");
+        }else{
+          this.router.navigateByUrl("/home");
         }
         
         this.loading.dismiss();

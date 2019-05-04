@@ -11,7 +11,10 @@
 
 
  <ion-list>
-   <ion-item  [routerDirection]="'root'" (click)="selectMyDevice(dev.ID)"  *ngFor="let dev of devices">
+    <ion-list-header>
+        <ion-searchbar placeholder="بحث ..." (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
+      </ion-list-header> 
+   <ion-item  [routerDirection]="'root'" (click)="selectMyDevice(dev.ID)"  *ngFor="let dev of filtered">
      <ion-grid fixed>
        <ion-row>
          <ion-col size="2">

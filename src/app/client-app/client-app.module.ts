@@ -36,10 +36,13 @@ const routes: Routes = [
         { path: 'order-success', loadChildren: './order-success/order-success.module#OrderSuccessPageModule' },
         { path: 'website', loadChildren: './website/website.module#WebsitePageModule' },
         { path: 'order-details', loadChildren: './order-details/order-details.module#OrderDetailsPageModule' },
-
-
+        { path: 'invoices', loadChildren: './invoices/invoices.module#InvoicesPageModule' },
+        { path: 'invoice-details', loadChildren: './invoice-details/invoice-details.module#InvoiceDetailsPageModule' },
+        { path: 'profile', loadChildren: './client-profile/client-profile.module#ClientProfilePageModule' },
       ]
-    }
+    },
+
+
     
     // {
     //   path: 'list',

@@ -4,9 +4,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/messaging';
 import { Platform, ToastController } from '@ionic/angular';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'page-client-login',
@@ -27,7 +28,7 @@ export class LoginClientPage implements OnInit {
     private router:Router,
     private shared:SharedService,
     private formBuilder:FormBuilder,
-    private statusBar:StatusBar,
+    // private statusBar:StatusBar,
     private auth:AuthService,
     ) { 
     this.loginForm=this.formBuilder.group({
@@ -47,12 +48,17 @@ export class LoginClientPage implements OnInit {
       }); 
       this.recaptchaVerifier.render();
     });
-    this.statusBar.styleDefault()
-    this.statusBar.isVisible=true;
+    // this.statusBar.styleDefault();
+    // this.statusBar.isVisible=true;
+
+    // // let status bar overlay webview
+    // this.statusBar.styleLightContent();
+
+    //   // set status bar to white
+    // this.statusBar.backgroundColorByName("primary");
   }
 
   onSubmit(){
-    if (this.platform.is('cordova')) {
       this.loadingService.present("جاري التحقق من البيانات ...");
       firebase.auth().signInWithPhoneNumber("+20"+this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
         this.verificationId = credential.verificationId;
@@ -85,14 +91,12 @@ export class LoginClientPage implements OnInit {
       }).catch(error=>{
         this.toastController.create({message:error,duration:2})
       });
-    }
-   
+    
     
     
   }
 
   onVerify(){
-    if (this.platform.is('cordova')) {
       if(!this.loadingService.isLoading)this.loadingService.present("جاري التحقق من البيانات ...");
       const code:string=<string>this.verifyForm.get("verifyCode").value;
       let signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, `${code}`);
@@ -104,10 +108,6 @@ export class LoginClientPage implements OnInit {
 
       }
       );
-
-    } 
-
-
   }
 
  

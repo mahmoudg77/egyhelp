@@ -19,7 +19,8 @@ export class LoginUserPage implements OnInit {
     public loadingController: LoadingController,
     private loadingService:LoadingService,
     private router:Router,
-    private auth:AuthService
+    private auth:AuthService,
+    // private statusBar:StatusBar
     ) { 
     this.loginForm=this.formBuilder.group({
       username:['',Validators.required],
@@ -29,7 +30,16 @@ export class LoginUserPage implements OnInit {
     
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // this.statusBar.styleDefault();
+    // this.statusBar.isVisible=true;
+
+    // // let status bar overlay webview
+    // this.statusBar.styleLightContent();
+
+    //   // set status bar to white
+    // this.statusBar.backgroundColorByName("primary");
+  }
 
   onSubmit(){
     this.loadingService.present("جاري التحقق من البيانات..");

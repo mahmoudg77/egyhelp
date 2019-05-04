@@ -4,14 +4,17 @@ import { Injectable } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { environment } from 'src/environments/environment';
 import { Firebase } from '@ionic-native/firebase/ngx';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/messaging';
+import { Storage } from '@ionic/storage';
 
  
 @Injectable()
 export class AuthService {
  public isLoggedIn:boolean=false;
- user: any=null;
-  constructor( private call:CallapiService,private firebase:Firebase
+ //user: any=null;
+  constructor( private call:CallapiService,private firebase:Firebase,
+    private storage:Storage
       ) {
  
   }
@@ -21,7 +24,9 @@ export class AuthService {
 
   }
   getType() {
+    
     return localStorage.getItem(environment.typeKey) || null;
+
   }
   getToken() {
     let token=localStorage.getItem(environment.tokenKey) || null;
@@ -38,6 +43,8 @@ export class AuthService {
     localStorage.removeItem(environment.tokenKey);
     localStorage.removeItem(environment.typeKey);
   }
+
+ 
   isLogin() {
     if (this.getToken()!=null && this.getToken()!=undefined) {
       return true;
@@ -46,10 +53,11 @@ export class AuthService {
     }
   }
   getUser() {
-    return this.user;
+    return this.storage.get("user");
   }
   setUser(value: any) {
-    this.user = value;
+    this.storage.set("user",value);
+    //this.user = value;
   }
  
   checkLogin(fnNext:any=null,fnError:any=null){
@@ -80,6 +88,7 @@ export class AuthService {
           next=>{
             this.setUser(next.account);
             this.setToken(next.token);
+            this.setType(next.type);
             if(fnNext!=null) fnNext(next);
           },
           error=>{

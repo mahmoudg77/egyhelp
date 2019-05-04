@@ -1,10 +1,9 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-          <ion-back-button defaultHref="/user/home"></ion-back-button>
-          <!-- <ion-menu-button ></ion-menu-button> -->
-      </ion-buttons>
-    <ion-title>{{title}}</ion-title>
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+    <ion-title>نتيجة البحث ({{data.recordsFiltered}})</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="onSearchClick()">
         <ion-icon slot="icon-only" name="search"></ion-icon>
@@ -14,14 +13,25 @@
 </ion-header>
 
 <ion-content>
-<ion-card *ngFor="let ord of data">
+<ion-card *ngFor="let ord of data.data">
   <ion-card-header>
-    <ion-card-title>{{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}</ion-card-title>
-    <ion-card-subtitle>{{ord.NAME}} (<a href="tel:{{ord.MOBIL1}}">{{ord.MOBIL}}</a> {{ord.MOBIL1!="0"?"-":""}} <a href="tel:{{ord.MOBIL1}}" *ngIf="ord.MOBIL1!='0'">{{ord.MOBIL1}}</a>)</ion-card-subtitle>
-    <ion-card-subtitle>{{ord.ADDRESS}}</ion-card-subtitle>
+    <ion-card-title>
+      {{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}
+      <span>#{{ord.ORDER_NO}}</span>
+    </ion-card-title>
+    <ion-card-subtitle>{{ord.NAME}} (<a href="tel:{{ord.MOBIL}}">{{ord.MOBIL}}</a> {{ord.MOBIL1!="0"?"-":""}} <a href="tel:{{ord.MOBIL1}}" *ngIf="ord.MOBIL1!='0'">{{ord.MOBIL1}}</a>)</ion-card-subtitle>
   </ion-card-header>
   <ion-card-content  (click)="openOrderHistory(ord.ORDER_NO)">
     <ion-grid fixed>
+
+      <ion-row>
+        <ion-col size="4">
+          العنوان
+        </ion-col>
+        <ion-col size="8">
+            <ion-card-subtitle>{{ord.ADDRESS}} - {{ord.CITY_NAM}} - {{ord.CUNTRY_NAM}}</ion-card-subtitle>
+        </ion-col>
+      </ion-row>
       <ion-row>
         <ion-col size="4"><strong>تاريخ الشكوى</strong></ion-col>
         <ion-col size="8">{{ord.COMPLAINT_DATE|date:'dd MMM yyyy'}}</ion-col>
@@ -94,6 +104,13 @@
      
     </ion-card-content>
   </ion-card>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 <!-- {
   "ORDER_NO": 73,

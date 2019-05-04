@@ -42,4 +42,7 @@ export class ClientHomeComponent implements OnInit {
     newOrder(){
         this.router.navigateByUrl("/client/select-device");
     }
+    open(url){
+        this.router.navigateByUrl(url);
+    }
 }
