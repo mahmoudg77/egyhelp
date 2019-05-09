@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: "AIzaSyDq3yu9vb_Mb7kwldvX6rId4s9-OF3K89k",
-    authDomain: "al-dawlia-test.firebaseapp.com",
-    databaseURL: "https://al-dawlia-test.firebaseio.com",
-    projectId: "al-dawlia-test",
-    storageBucket: "al-dawlia-test.appspot.com",
-    messagingSenderId: "862734630161"
+    apiKey: "AIzaSyBncGKiewy28LJVXA7HRxbOzMtIhpWeBpQ",
+    authDomain: "eldawlia-app.firebaseapp.com",
+    databaseURL: "https://eldawlia-app.firebaseio.com",
+    projectId: "eldawlia-app",
+    storageBucket: "eldawlia-app.appspot.com",
+    messagingSenderId: "201049171394",
+    appId: "1:201049171394:web:3e5e00f37060fa8c"
   },
   tokenKey:"x-aldawlia-token-key",
   typeKey:"x-aldawlia-type-key",
@@ -20,8 +21,10 @@ export const environment = {
   },
   apiKey:"7F53sB7WZEMXjuMju4vhj8DzvpLNtUuGGTE3CWREk9CTGXSET5qPUgFD7XRpDkozyrahw7bxVWZqHrc4",
   //apiUrl:"http://localhost:61852"
-   apiUrl:"https://dawlia.nearyouweb.com"
+   //apiUrl:"https://dawlia.nearyouweb.com"
    //apiUrl:"http://41.32.248.67"
+   apiUrl:"https://tawkeel.site"
+
 };
 
 /*

@@ -44,7 +44,7 @@ export class HistoryTecComponent implements OnInit {
   getComplaints(){
     this.complaints=[];
     this.dats.forEach(itm=>{
-        if(itm.CLOSE_ACTION=="1")this.closed=true;
+        if(itm.CLOSE_ACTION=="1" && itm.CLOSE_TECH=="1")this.closed=true;
        if(this.complaints.filter(i=>i.COMPLAINT_NO==itm.COMPLAINT_NO).length==0) this.complaints.push({COMPLAINT_NO:itm.COMPLAINT_NO,COMPLAINT_DATE:itm.COMPLAINT_DATE});
       }
     );

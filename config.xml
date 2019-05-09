@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.webegy.aldawlia" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.webegy.aldawlia" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>الدولية للصيانة</name>
     <description>لأعطال الأجهزة الكهربية</description>
     <author email="info@web-egy.com" href="http://web-egy.com/">Webegy team</author>
@@ -81,7 +81,6 @@
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-firebase" spec="2.0.5" />
     <plugin name="cordova-plugin-firebase-authentication" spec="1.0.1">
         <variable name="FIREBASE_AUTH_VERSION" value="version" />
     </plugin>
@@ -89,5 +88,4 @@
     <plugin name="cordova-plugin-ionic-webview" spec="^3.1.2" />
     <plugin name="cordova-plugin-inappbrowser" spec="3.0.0" />
     <engine name="browser" spec="5.0.4" />
-    <engine name="android" spec="7.1.4" />
 </widget>

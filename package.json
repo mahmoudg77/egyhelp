@@ -30,11 +30,11 @@
 		"@ionic-native/status-bar": "^5.2.0",
 		"@ionic/angular": "^4.1.0",
 		"@ionic/storage": "^2.2.0",
-		"cordova-android": "7.1.4",
+		"cordova-android": "8.0.0",
 		"cordova-browser": "5.0.4",
 		"cordova-plugin-appminimize": "1.0.1",
 		"cordova-plugin-device": "^2.0.2",
-		"cordova-plugin-firebase": "2.0.5",
+		"cordova-plugin-firebase": "git+https://github.com/dpa99c/cordova-plugin-firebase.git#GH-1057-April-05-android-build-issue",
 		"cordova-plugin-firebase-authentication": "1.0.1",
 		"cordova-plugin-inappbrowser": "3.0.0",
 		"cordova-plugin-ionic-keyboard": "^2.1.3",
@@ -54,7 +54,7 @@
 	},
 	"devDependencies": {
 		"@angular-devkit/architect": "~0.12.3",
-		"@angular-devkit/build-angular": "^0.13.8",
+		"@angular-devkit/build-angular": "^0.13.9",
 		"@angular-devkit/core": "~7.2.3",
 		"@angular-devkit/schematics": "~7.2.3",
 		"@angular/cli": "~7.3.1",
@@ -88,13 +88,13 @@
 			"cordova-plugin-device": {},
 			"cordova-plugin-ionic-webview": {},
 			"cordova-plugin-ionic-keyboard": {},
-			"cordova-plugin-firebase": {},
 			"cordova-plugin-firebase-authentication": {
 				"FIREBASE_AUTH_VERSION": "version"
 			},
 			"cordova-plugin-appminimize": {},
 			"cordova-plugin-inappbrowser": {},
-			"cordova-sqlite-storage": {}
+			"cordova-sqlite-storage": {},
+			"cordova-plugin-firebase": {}
 		},
 		"platforms": [
 			"browser",
