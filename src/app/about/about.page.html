@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+       <ion-back-button defaultHref="/check"></ion-back-button>
+     </ion-buttons>
+    <ion-title>عن التطبيق</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center class="vertical-align-content"  padding>
+ 
+    <h1>تطبيق الدولية للصيانة </h1>
+    <br/>
+    <br/>
+    <ion-img src="/assets/icon/favicon.png" ></ion-img>
+    <br/>
+    <h2>اصدار التطبيق</h2>
+     <h2 style="color:brown">{{version||"1.0.0.3"}} </h2>
+     <br/>
+     <br/>
+     <a href="http://web-egy.com" color="primary">WEBEGY</a>
+    <br/>
+    <br/>
+    <ion-button (click)="onRateApp()">
+      <h3>قيم التطبيق  <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>  
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            </h3>
+    </ion-button>
+</ion-content>

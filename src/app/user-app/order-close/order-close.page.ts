@@ -1,3 +1,4 @@
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoadingService } from './../../services/loading.service';
 import { ToastController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -33,7 +34,8 @@ export class OrderClosePage implements OnInit {
               private router:ActivatedRoute,
               private toaster:ToastController,
               private counter:CounterService,
-              private loading:LoadingService) {
+              private loading:LoadingService,
+              private auth:AuthService) {
     this.data.Follow_ID=this.defaults.follow;
     //this.data.OrderCase_ID=this.defaults.status;
     
@@ -90,18 +92,20 @@ export class OrderClosePage implements OnInit {
         //     )
         //   }
         //   this.loading.dismiss();
-          
-        this.order.getMoreOrders({draw:0,length :1000,start: 0}, 0,"","",
-          next=>{
-            this.order.currentOrders=next;
-            this.loading.dismiss();
-          });
-          this.counter.getUserCounters();
-        this.route.navigateByUrl("/user/success");
-      },
-      error=>{
+        this.auth.getUser().then(user=>{
+          this.order.getMoreOrders({draw:0,length :1000,start: 0}, 0,"","",user.ENG_ID,0,
+            next=>{
+              this.order.currentOrders=next;
+              this.loading.dismiss();
+            });
+            this.counter.getUserCounters();
+          this.route.navigateByUrl("/user/success");
+        },
+        error=>{
+  
+        })
 
-      })
+        })
   }
 
 

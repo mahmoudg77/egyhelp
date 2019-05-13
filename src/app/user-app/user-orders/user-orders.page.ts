@@ -30,6 +30,8 @@ export class UserOrdersPage implements OnInit{
     state:0,
     date_from:"",
     date_to:"",
+    cst_id:0,
+    eng_id:0
   }
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   constructor(public order:OrdersService,private router:ActivatedRoute,private route:Router,
@@ -72,8 +74,11 @@ export class UserOrdersPage implements OnInit{
           this.searchParams.state=params['state']||null;
           this.searchParams.date_from=params['date_from']||"";
           this.searchParams.date_to=params['date_to']||"";
+          this.searchParams.cst_id=params['cst_id']||0;
+          this.searchParams.eng_id=params['eng_id']||0;
           // this.title="نتيجة البحث";
           this.order.getMoreOrders(this.dataLoader,this.searchParams.state,this.searchParams.date_from,this.searchParams.date_to,
+            this.searchParams.eng_id,this.searchParams.cst_id,
             next=>{
               this.data=next;
                 // this.title="نتيجة البحث"+ "("+this.data.recordsFiltered+")";
@@ -107,6 +112,7 @@ export class UserOrdersPage implements OnInit{
   loadData(event) {
     this.loading.present();
     this.order.getMoreOrders(this.dataLoader, this.searchParams.state,this.searchParams.date_from,this.searchParams.date_to,
+      this.searchParams.eng_id,this.searchParams.cst_id,
       next=>{
         next.data.forEach(itm => {
           this.data.data.push(itm);

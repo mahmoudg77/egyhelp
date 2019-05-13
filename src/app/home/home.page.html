@@ -1,4 +1,10 @@
-
+<ion-header>
+    <ion-toolbar color="primary">
+         <ion-title>
+          الدولية للصيانة
+        </ion-title>
+      </ion-toolbar>
+    </ion-header>
 <ion-content class="home-container">
       <ion-grid fixed>
           <ion-row>
@@ -22,5 +28,48 @@
             </a>
           </ion-col>
         </ion-row>
+        <!-- <ion-row>
+          <ion-col size="4">
+            <ion-icon style="font-size:1.5em" (click)="openPage('/about')" name="information-circle" color="primary"></ion-icon>
+          </ion-col>
+          <ion-col size="4">
+            <ion-icon style="font-size:1.5em" (click)="openWebSite(websiteUrl)"  name="planet" color="primary"></ion-icon>
+          </ion-col>
+          <ion-col size="4">
+            <ion-icon style="font-size:1.5em" (click)="openWebSite(helpUrl)"  name="help-circle" color="primary"></ion-icon>
+          </ion-col>
+         
+        </ion-row> -->
       </ion-grid>
+      <!-- <ion-tabs >
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button  >
+              <ion-icon style="font-size:2em" (click)="openPage('/about')" name="information-circle" color="primary"></ion-icon>
+            </ion-tab-button>
+          <ion-tab-button  >
+              <ion-icon style="font-size:2em"  (click)="openWebSite(websiteUrl)" name="planet" color="primary"></ion-icon>
+            </ion-tab-button>
+          <ion-tab-button >
+              <ion-icon style="font-size:2em"  (click)="openWebSite(helpUrl)" name="help-circle" color="primary"></ion-icon>
+            </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs> -->
 </ion-content>
+<ion-footer>
+    <ion-toolbar color="light" >
+         <ion-grid fixed>
+           <ion-row>
+             <ion-col size="4">              
+               <ion-icon style="font-size:2em" (click)="openPage('/about')" name="information-circle" color="primary"></ion-icon>
+             </ion-col>
+             <ion-col size="4">
+                <ion-icon style="font-size:2em"  (click)="openWebSite(websiteUrl)" name="planet" color="primary"></ion-icon>
+             </ion-col>
+             <ion-col size="4">
+                <ion-icon style="font-size:2em"  (click)="openWebSite(helpUrl)" name="help-circle" color="primary"></ion-icon>
+             </ion-col>
+           </ion-row>
+         </ion-grid>
+    </ion-toolbar>
+  </ion-footer>
+  

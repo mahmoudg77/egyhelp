@@ -11,7 +11,7 @@ import { UserAppPage } from './user-app.page';
 
 const routes: Routes = [
   {
-    path:'user',
+    path:'',
     component:UserAppPage,
     children:[
       {

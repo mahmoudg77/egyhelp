@@ -17,7 +17,7 @@ import { ClientHomeModule } from './client-home/client-home.module';
 const routes: Routes = [
    
     {
-      path:'client',
+      path:'',
       component:ClientAppComponent,
       children:[
         {

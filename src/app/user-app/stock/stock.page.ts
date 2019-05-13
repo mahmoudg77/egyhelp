@@ -11,14 +11,15 @@ export class StockPage implements OnInit {
   filtered:any[];
   constructor(private stock:StockService) { }
 
-  ngOnInit() {
+  ngOnInit(event=null) {
     this.stock.getMyStock(
       next=>{
         this.data=next;
         this.filtered=next.filter(itm=>itm.Balance>0);
+        if(event) event.target.complete();
       },
       err=>{
-
+        if(event) event.target.complete();
       }
     )
   }

@@ -27,22 +27,33 @@ export class UserHomeComponent implements OnInit {
     env=environment;
 
     @ViewChild(IonSlides) slider:IonSlides;
-    ngOnInit(): void {
+    ngOnInit(event=null): void {
        this.counter.getUserCounters(
            next=>{
                 this.data=next;
+                this.loadSlider(event)
+                //if(event) event.target.complete();
+           },
+           error=>{
+                this.loadSlider(event)
            }
        )
-       this.settings.getSettings("images_url",'/content/imgs/',
+       
+    }
+    loadSlider(event=null){
+        this.settings.getSettings("images_url",'/content/imgs/',
        images_url=>{
             this.settings.getSettings("home_slider",'1.jpg|2.jpg|3.jpg',
             next=>{
                     this.slides=next.split("|").map(i=>images_url + 'slider/'+i);
                     this.slider.startAutoplay() ;
+                    if(event) event.target.complete();
+            },
+            error=>{
+                if(event) event.target.complete();
             });
         });
     }
-
     constructor(public counter:CounterService,private router:Router,private settings:AppSettingsService){
 
     }

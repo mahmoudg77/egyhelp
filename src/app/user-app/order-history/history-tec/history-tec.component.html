@@ -24,19 +24,19 @@
                 <form >
                     <ion-item>
                       <ion-label position="fixed">تاريخ المتابعة</ion-label>
-                      <ion-input>{{i.DOING_DATE|date:'dd/MM/yyyy'}}</ion-input>
+                      {{i.DOING_DATE|date:'dd/MM/yyyy'}}
                     </ion-item>
                     <ion-item>
                       <ion-label position="fixed">المكان</ion-label>
-                      <ion-input>{{i.TYP_ORDER_PLC_NAM}}</ion-input>
+                      {{i.TYP_ORDER_PLC_NAM}}
                     </ion-item>
                     <ion-item>
                       <ion-label position="fixed">الفني</ion-label>
-                      <ion-input>{{i.ENG_NAM}}</ion-input>
+                      {{i.ENG_NAM}}
                     </ion-item>
                     <ion-item>
                       <ion-label position="fixed">البيان</ion-label>
-                      <ion-input>{{i.NOTES}}</ion-input>
+                      {{i.NOTES}}
                     </ion-item>
                   </form>
             </ion-slide>
@@ -47,7 +47,7 @@
     </div>
   </section>
 </ion-content>
-<ion-footer *ngIf="!closed" >
+<ion-footer *ngIf="last_complaint" >
     <ion-toolbar>
       <ion-title>
           <ion-button expand="full" color="primary" type="button"  (click)="onAddReport()">

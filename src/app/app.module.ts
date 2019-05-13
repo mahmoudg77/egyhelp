@@ -1,3 +1,4 @@
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { StockService } from './services/bll/stock.service';
 import { LookupsService } from './services/bll/lookups.service';
 import { CheckPageModule } from './check/check.module';
@@ -28,6 +29,7 @@ import { StockPipePipe } from './pipes/stock-pipe.pipe';
 import { IonicStorageModule } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { AsyncPipe } from '@angular/common';
+import { Market } from '@ionic-native/market/ngx';
 
 @NgModule({
   declarations: [AppComponent, StockPipePipe],
@@ -59,6 +61,8 @@ import { AsyncPipe } from '@angular/common';
     OrdersService,
     StockService,
     AsyncPipe,
+    AppVersion,
+    Market
     
   ],
   bootstrap: [AppComponent]

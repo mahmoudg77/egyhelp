@@ -36,9 +36,8 @@ export class OrdersService {
      this.api.getRequest("/Order/OrderHistory/"+id,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
    }
    
-   getAllOrders(state=null,from="",to="",next:any=null,error:any=null,){
-    this.api.getRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to,"",data=>{
-      
+   getAllOrders(state=null,from="",to="",eng_id=0,cst_id=0,next:any=null,error:any=null,){
+    this.api.getRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to+"&eng_id="+eng_id+"&cst_id="+cst_id,"",data=>{
       if(next){
         next(data);
       }
@@ -71,8 +70,8 @@ export class OrdersService {
   // }
 
 
-  getMoreOrders(dataLoader:any,state=null,from="",to="",next:any=null,error:any=null){
-    this.api.postRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to,dataLoader,
+  getMoreOrders(dataLoader:any,state=null,from="",to="",eng_id=0,cst_id=0,next:any=null,error:any=null){
+    this.api.postRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to+"&eng_id="+eng_id+"&cst_id="+cst_id,dataLoader,
     resp=>{
        
       

@@ -54,6 +54,12 @@ export class ClientAppComponent implements OnInit {
           onClick:url=>{this.openWebSite(this.helpUrl)}
         },
         {
+          title: 'عن التطبيق',
+          icon: 'information-circle',
+          url: '/about',
+          onClick:url=>{this.openPage(url)}
+        },
+        {
           title: 'تسجيل الخروج',
           icon: 'log-out',
           onClick:url=>{this.logout()}

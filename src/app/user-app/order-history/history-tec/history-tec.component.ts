@@ -13,7 +13,8 @@ import { OrdersService } from 'src/app/services/bll/orders.service';
 export class HistoryTecComponent implements OnInit {
   dats: any[];
   complaints: any[];
-  closed:boolean=false;
+  //closed:boolean=false;
+  last_complaint: any;
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
               private loading:LoadingService,
@@ -44,7 +45,7 @@ export class HistoryTecComponent implements OnInit {
   getComplaints(){
     this.complaints=[];
     this.dats.forEach(itm=>{
-        if(itm.CLOSE_ACTION=="1" && itm.CLOSE_TECH=="1")this.closed=true;
+        if(itm.CLOSE_ACTION=="0" && itm.CLOSE_TECH=="0")this.last_complaint=itm;
        if(this.complaints.filter(i=>i.COMPLAINT_NO==itm.COMPLAINT_NO).length==0) this.complaints.push({COMPLAINT_NO:itm.COMPLAINT_NO,COMPLAINT_DATE:itm.COMPLAINT_DATE});
       }
     );
@@ -54,9 +55,9 @@ export class HistoryTecComponent implements OnInit {
 
   onAddReport(){
     const params={
-      comp_no:this.dats[0].COMPLAINT_NO,
-      order_no:this.dats[0].ORDER_NO,
-      comp_id:this.dats[0].IDD}
+      comp_no:this.last_complaint.COMPLAINT_NO,
+      order_no:this.last_complaint.ORDER_NO,
+      comp_id:this.last_complaint.IDD}
 
     this.router.navigate(['/','user','orders','close'],{
       queryParams: params,

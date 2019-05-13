@@ -8,6 +8,14 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="ngOnInit($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
    <ion-list>
      <ion-list-header>
        <ion-searchbar placeholder="بحث ..." (ionChange)="onSearchChange($event)" [debounce]="250"></ion-searchbar>
