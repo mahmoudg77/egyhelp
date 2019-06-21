@@ -9,7 +9,16 @@
 
 <ion-content padding>
   <ion-card>
-    
+    <ion-card-header>
+      <ion-card-title>
+        {{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}
+        <span style="float: left">#{{ord.ORDER_NO}}</span>
+        
+      </ion-card-title>
+      <ion-card-subtitle>{{ord.NAME}} (<a href="tel:{{ord.MOBIL}}">{{ord.MOBIL}}</a> {{ord.MOBIL1!="0"?"-":""}} <a href="tel:{{ord.MOBIL1}}" *ngIf="ord.MOBIL1!='0'">{{ord.MOBIL1}}</a>)
+        
+      </ion-card-subtitle>
+    </ion-card-header>
     <ion-card-content>
        
     <form  (ngSubmit)="onSubmit()">
@@ -25,7 +34,7 @@
           <ion-select-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ion-select-option>
           </ion-select>   
       </ion-item>
-      <ion-item *ngIf="data.Follow_ID==2 || data.Follow_ID==3">
+      <ion-item *ngIf="data.Follow_ID==3 || data.Follow_ID==10">
         <ion-label position="fixed">تاريخ التأجيل</ion-label>
         <ion-input  name="Action_Date" type="date" [(ngModel)]="data.Action_Date"  ></ion-input>
       </ion-item>
@@ -34,10 +43,10 @@
         <ion-textarea name="Customer_Report"  [(ngModel)]="data.Customer_Report" ></ion-textarea>
       </ion-item>
       <ion-item>
-        <ion-label position="floating" dir="rtl">ملاحظات </ion-label>
-        <ion-textarea name="Notes"  [(ngModel)]="data.Notes" ></ion-textarea>
+        <ion-label position="floating" dir="rtl">تقرير الفني </ion-label>
+        <ion-textarea name="Notes"  [(ngModel)]="data.Tech_Report" ></ion-textarea>
       </ion-item>
-      <ion-button block color="primary" type="submit" >
+      <ion-button block color="primary" type="submit" [disabled]="submited" >
         ارسال التقرير
       </ion-button>
     </form>

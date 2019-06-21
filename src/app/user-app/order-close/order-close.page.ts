@@ -28,6 +28,8 @@ export class OrderClosePage implements OnInit {
     header: 'حالة الأمر',
     subHeader: ''
   };
+  ord: any;
+  submited: boolean;
   constructor(private order:OrdersService,
               private lookup:LookupsService,
               private route:Router,
@@ -43,10 +45,12 @@ export class OrderClosePage implements OnInit {
   
   ngOnInit() {
     this.loading.present();
+    
     this.lookup.getFollowStates(
       next=>{
         this.follows=next;
         this.data.Follow_ID=this.defaults.follow;
+        
         }
       )
       this.lookup.getOrderStates(
@@ -61,27 +65,44 @@ export class OrderClosePage implements OnInit {
           this.data.Order_No=+params['order_no'];
           this.data.Comp_No=+params['comp_no'];
           this.data.Comp_ID=+params['comp_id'];
+          this.order.getTechOrderDetails(this.data.Comp_ID,
+            next=>{
+              this.ord=next;
+            })
         })
        
-
   }
-  onSubmit(){
+   onSubmit(){
+    this.submited=true;
     this.loading.present("جاري الحفظ ...");
     if(this.data.OrderCase_ID==this.defaults.status && this.data.Follow_ID==this.defaults.follow){
-      this.toaster.create({message:"اختر حالة الطلب او المتابعة",duration:2});
+      this.toaster.create({message:"اختر حالة الطلب او المتابعة",duration:2000}).then(toast=>{toast.present()});
       this.loading.dismiss();
+      this.submited=false;
       return ;
     }
-    if(this.data.Customer_Report==""){
-      this.toaster.create({message:"ادخل تقرير العميل ",duration:2})
+    if((this.data.Customer_Report||"")==""){
+      this.toaster.create({message:"ادخل تقرير العميل ",duration:2000}).then(toast=>{toast.present()})
       this.loading.dismiss();
+      this.submited=false;
       return ;
     }
-    if(this.data.Notes==""){
-      this.toaster.create({message:"ادخل تقرير العميل ",duration:2})
+    if((this.data.Tech_Report||"")==""){
+      this.toaster.create({message:"ادخل تقرير الفني ",duration:2000}).then(toast=>{toast.present()})
       this.loading.dismiss();
+      this.submited=false;
+
       return ;
     }
+
+    if((this.data.Follow_ID==3 || this.data.Follow_ID==10) && (this.data.Action_Date||"")==""){
+      this.toaster.create({message:"ادخل تاريخ التأجيل ",duration:2000}).then(toast=>{toast.present()})
+      this.loading.dismiss();
+      this.submited=false;
+
+      return ;
+    }
+
     this.order.closeOrder(this.data,
       next=>{
         // const orders =this.order.currentOrders.data.filter(a=>a.ORDER_NO==this.data.Order_No);
@@ -97,12 +118,23 @@ export class OrderClosePage implements OnInit {
             next=>{
               this.order.currentOrders=next;
               this.loading.dismiss();
-            });
+              this.submited=false;
+
+            },
+            error=>{
+              this.loading.dismiss();
+              this.submited=false;
+
+            }
+            );
             this.counter.getUserCounters();
           this.route.navigateByUrl("/user/success");
         },
         error=>{
-  
+          this.loading.dismiss();
+          this.submited=false;
+
+        
         })
 
         })

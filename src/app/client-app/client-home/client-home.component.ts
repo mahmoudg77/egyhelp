@@ -4,7 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/bll/orders.service';
-import { ToastController, IonSlides } from '@ionic/angular';
+import { ToastController, IonSlides, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -33,10 +33,15 @@ export class ClientHomeComponent implements OnInit {
        )
 
        this.slider.startAutoplay() ;
+       this.platform.backButton.subscribe(()=>{
+           if(this.router.url=="/client/home"){
+                navigator['app'].exitApp();
+            } 
+        })
     }
 
-    constructor(private counter:CounterService,private router:Router){
-
+    constructor(private counter:CounterService,private router:Router,private platform:Platform){
+        
     }
 
     newOrder(){

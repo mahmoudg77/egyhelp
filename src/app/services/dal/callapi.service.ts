@@ -1,3 +1,4 @@
+import { Platform } from '@ionic/angular';
 
 import { Router } from '@angular/router';
  import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -8,16 +9,33 @@ import { Guid } from 'guid-typescript';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared.service';
+//import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Serializer } from '@angular/compiler';
+
 
 @Injectable()
 export class CallapiService {
-
+  version:string;
+  package:string;
   constructor(
     public http:HttpClient,
     private shared:SharedService,
-    private route:Router) { 
-     
+    private route:Router,
+    //private crashlytic:FirebaseCrashlytics,
+    private appVersion:AppVersion,
+    private platform:Platform
+    ) { 
+      //this.crashlytic.initialise();
+    if(!platform.is('ios') && !platform.is('android')) return;
+      appVersion.getVersionNumber().then((ver:string)=>{
+        this.version=ver;
+      });
+      appVersion.getPackageName().then(id=>{
+        this.package=id;
+      })
   }
+  
   getToken() {
     let token= localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
@@ -32,6 +50,7 @@ export class CallapiService {
      let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
      if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
      if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
+     if(this.version!=null )  headers=headers.append("APP_VER",this.version);
 
      this.http.get(environment.apiUrl +  url +(parms?"?":"")+parms,{headers})
                       .pipe(map((result:apiResult)=>{return result}))
@@ -40,12 +59,13 @@ export class CallapiService {
                             if (next.isSuccess) {
                                 success_callbak(next.data);              
                             } else {
+                              this.logException("GET " +url,headers,pars,next);
                               this.softErrorHandling({code:next.code,message:next.message});
-
                               if(error_callback!=undefined)  error_callback(next.message);
                             }
                             },
                             error=>{
+                              this.logException("GET " +url,headers,pars,error);
                               if(error_callback!=undefined)  error_callback(error.statusText);
                               this.errorHandling(error);
                             }
@@ -57,26 +77,49 @@ export class CallapiService {
     let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
     if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
     if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
+    if(this.version!=null )  headers=headers.append("APP_VER",this.version);
+    
+    this.http.post(environment.apiUrl + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
+            .subscribe(
+              next=>{
+                  if (next.isSuccess) {
+                    if(success_callbak!=null)success_callbak(next.data);              
+                  } else {
+                    this.logException("POST " + url,headers,pars,next);
+                    this.softErrorHandling({code:next.code,message:next.message});
+                    if(error_callback!=null) error_callback({code:next.code,message:next.message});
+                    
+                  }
+              },
+              error=>{
+                this.logException("POST " +url,headers,pars,error);
+                if(error_callback!=null)  error_callback({code:error.status,message:error.statusText});
+                //this.errorHandling(error)
+              }
+            ) 
+  }
+    logException(url,headers:HttpHeaders,pars,error){
+      var obj={
+        Package:this.package,
+        Ver:this.version,
+        Url:url,
+        Headers:headers.keys().map(key =>
+          `${key}: ${headers.get(key)}`).join("<br/>"),
+        Body:pars,
+        Response:JSON.stringify(error)
 
-      this.http.post(environment.apiUrl + url ,pars,{headers}).pipe(map((result:apiResult)=>{return result}))
-              .subscribe(
-                next=>{
-                    if (next.isSuccess) {
-                      if(success_callbak!=null)success_callbak(next.data);              
-                    } else {
+      }
+      
+      this.http.post(environment.apiUrl+"/Log/Error",obj).subscribe(
+        next=>{
 
-                      this.softErrorHandling({code:next.code,message:next.message});
-                      if(error_callback!=null) error_callback({code:next.code,message:next.message});
-                      
-                    }
-                },
-                error=>{
-                  if(error_callback!=null)  error_callback({code:error.status,message:error.statusText});
-                  //this.errorHandling(error)
-                }
-              ) 
+        },
+        error=>{
+
+        }
+      )
+     
     }
-
     errorHandling(error:any){
       if(error.status==403){
         this.route.navigate(['home']);

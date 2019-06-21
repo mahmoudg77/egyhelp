@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OrdersService } from 'src/app/services/bll/orders.service';
-import { ToastController, IonSlides } from '@ionic/angular';
+import { ToastController, IonSlides, Platform } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -38,6 +38,11 @@ export class UserHomeComponent implements OnInit {
                 this.loadSlider(event)
            }
        )
+       this.platform.backButton.subscribe(()=>{
+        if(this.router.url=="/user/home") {
+            navigator['app'].exitApp();
+        } 
+        })
        
     }
     loadSlider(event=null){
@@ -54,8 +59,8 @@ export class UserHomeComponent implements OnInit {
             });
         });
     }
-    constructor(public counter:CounterService,private router:Router,private settings:AppSettingsService){
-
+    constructor(public counter:CounterService,private router:Router,private settings:AppSettingsService,private platform:Platform){
+         
     }
 
 
@@ -68,6 +73,7 @@ export class UserHomeComponent implements OnInit {
     openStock(){
         this.router.navigateByUrl("/user/stock")
     }
+    
     
     
 }

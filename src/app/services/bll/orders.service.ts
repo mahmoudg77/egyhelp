@@ -53,21 +53,10 @@ export class OrdersService {
   getInvoicesDetails(OrderNo:number,next:any=null,error:any=null,){
     this.api.getRequest("/Order/InvoiceDetails/"+OrderNo,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
-
-
-  // getCurrentOrders(next:any=null,error:any=null){
-  //   this.api.postRequest("/order/Tech/MyOrders?state=","",
-  //   resp=>{
-  //     if(resp){
-  //         this.currentOrders=resp;
-  //       }
-  //       next(resp);
-  //     },
-  //     err=>{
-  //       if(error)error(err);
-  //     }
-  //   );
-  // }
+  
+  getTechOrderDetails(IDD:number,next:any=null,error:any=null,){
+    this.api.getRequest("/Order/Tech/OrderDetails/"+IDD,"",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
 
 
   getMoreOrders(dataLoader:any,state=null,from="",to="",eng_id=0,cst_id=0,next:any=null,error:any=null){

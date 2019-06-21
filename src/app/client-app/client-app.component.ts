@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { WebIntent } from '@ionic-native/web-intent/ngx';
 
 @Component({
     selector: './client-app',
@@ -67,7 +68,7 @@ export class ClientAppComponent implements OnInit {
       ];
   websiteUrl: string;
   helpUrl: string;
-
+  whatsapp:string;
     ngOnInit(): void {
         // this.statusBar.styleDefault();
         // this.statusBar.isVisible=true;
@@ -85,6 +86,10 @@ export class ClientAppComponent implements OnInit {
          next=>{
                 this.helpUrl =next;
          });
+         this.settings.getSettings("whatsapp_number",'201143184244',
+         next=>{
+                this.whatsapp =next;
+         });
     }
     constructor(
         // private statusBar: StatusBar,
@@ -92,7 +97,8 @@ export class ClientAppComponent implements OnInit {
         private router:Router,
         private inappbrowser:InAppBrowser,
         private platform:Platform,
-        private settings:AppSettingsService
+        private settings:AppSettingsService,
+        private webIntent:WebIntent
     ){
 
     }
@@ -104,12 +110,32 @@ export class ClientAppComponent implements OnInit {
     }
     openWebSite(url:string){
       if(this.platform.is("android")||this.platform.is("ios")){
-        this.inappbrowser.create(url,"_self").show();
+        //this.inappbrowser.create(url,"_self").show();
+        window.open(url,"_self");
       }else{
         window.open(url,"_self");
       }
     }
+
+    openIntent(url:string,intent:string){
+      const options = {
+        action: this.webIntent.ACTION_VIEW,
+        url: url,
+        package:intent,//"com.whatsapp",
+       
+      };
+      //this.share.shareVia("","","");
+      this.webIntent.startActivity(options).then(next=>{}, error=>{alert(error)});
+    }
     openPage(url:string){
       this.router.navigateByUrl(url);
+    }
+    fabButtonOpened: Boolean;
+    openFabButton(){
+      if(this.fabButtonOpened==false){
+          this.fabButtonOpened=true;
+      }else{
+          this.fabButtonOpened=false;
+      }
     }
 }

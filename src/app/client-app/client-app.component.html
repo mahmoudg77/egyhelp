@@ -34,8 +34,28 @@
 
   </ion-split-pane>
 
-  <ion-fab-button>
+  <!-- <ion-fab-button>
     <a href="tel://19089" style="color:#fff;padding-top: 8px;">
       <ion-icon name="call" style="color:#fff;font-size: 1.9em"></ion-icon>
     </a>
+  </ion-fab-button> -->
+
+  
+
+<ion-fab vertical="bottom" horizontal="start">
+  <ion-fab-button >
+    <ion-icon name="call" style="color:#fff;font-size: 1.9em"></ion-icon>
   </ion-fab-button>
+
+  <ion-fab-list side="top">
+    <ion-fab-button (click)="openIntent('https://wa.me/'+whatsapp,'com.whatsapp')">
+      <ion-icon name="logo-whatsapp" style="color:green;font-size: 1.9em"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button (click)="openWebSite('tel://19089')">
+      <ion-icon name="call" style="color:red;font-size: 1.9em"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+
+</ion-fab>
+
+
