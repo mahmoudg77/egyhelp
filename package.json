@@ -24,6 +24,7 @@
 		"@ionic-native/app-version": "^5.5.1",
 		"@ionic-native/core": "^5.0.0",
 		"@ionic-native/firebase": "^5.2.0",
+		"@ionic-native/firebase-authentication": "^5.8.0",
 		"@ionic-native/in-app-browser": "^5.3.0",
 		"@ionic-native/ionic-webview": "^5.3.0",
 		"@ionic-native/market": "^5.5.1",
@@ -35,7 +36,7 @@
 		"com-darryncampbell-cordova-plugin-intent": "1.1.7",
 		"cordova-android": "8.0.0",
 		"cordova-browser": "5.0.4",
-		"cordova-ios": "4.5.5",
+		"cordova-ios": "^5.0.1",
 		"cordova-plugin-app-version": "0.1.9",
 		"cordova-plugin-appminimize": "1.0.1",
 		"cordova-plugin-device": "^2.0.2",
@@ -82,7 +83,8 @@
 		"protractor": "~5.4.0",
 		"ts-node": "~8.0.0",
 		"tslint": "~5.12.0",
-		"typescript": "~3.1.6"
+		"typescript": "~3.1.6",
+		"xcode": "^2.0.0"
 	},
 	"description": "An Ionic project",
 	"cordova": {
@@ -99,11 +101,13 @@
 			"cordova-plugin-firebase": {},
 			"cordova-plugin-app-version": {},
 			"cordova-plugin-market": {},
-			"com-darryncampbell-cordova-plugin-intent": {}
+			"com-darryncampbell-cordova-plugin-intent": {},
+			"cordova-plugin-firebase-authentication": {}
 		},
 		"platforms": [
 			"browser",
-			"android"
+			"android",
+			"ios"
 		]
 	}
 }
