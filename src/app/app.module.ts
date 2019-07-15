@@ -30,7 +30,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { environment } from 'src/environments/environment';
 import { AsyncPipe } from '@angular/common';
 import { Market } from '@ionic-native/market/ngx';
-import { WebIntent } from '@ionic-native/web-intent/ngx';
+// import { WebIntent } from '@ionic-native/web-intent/ngx';
 @NgModule({
   declarations: [AppComponent, StockPipePipe],
   entryComponents: [],
@@ -63,7 +63,7 @@ import { WebIntent } from '@ionic-native/web-intent/ngx';
     AsyncPipe,
     AppVersion,
     Market,
-    WebIntent
+    // WebIntent
 
     
   ],
