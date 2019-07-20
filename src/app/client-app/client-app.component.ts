@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-// import { WebIntent } from '@ionic-native/web-intent/ngx';
+import { WebIntent } from '@ionic-native/web-intent/ngx';
 
 @Component({
     selector: './client-app',
@@ -98,7 +98,7 @@ export class ClientAppComponent implements OnInit {
         private inappbrowser:InAppBrowser,
         private platform:Platform,
         private settings:AppSettingsService,
-        // private webIntent:WebIntent
+        private webIntent:WebIntent
     ){
 
     }
@@ -117,16 +117,16 @@ export class ClientAppComponent implements OnInit {
       }
     }
 
-    // openIntent(url:string,intent:string){
-    //   const options = {
-    //     action: this.webIntent.ACTION_VIEW,
-    //     url: url,
-    //     package:intent,//"com.whatsapp",
+    openIntent(url:string,intent:string){
+      const options = {
+        action: this.webIntent.ACTION_VIEW,
+        url: url,
+        package:intent,//"com.whatsapp",
        
-    //   };
-    //   //this.share.shareVia("","","");
-    //   this.webIntent.startActivity(options).then(next=>{}, error=>{alert(error)});
-    // }
+      };
+      //this.share.shareVia("","","");
+      this.webIntent.startActivity(options).then(next=>{}, error=>{alert(error)});
+    }
     openPage(url:string){
       this.router.navigateByUrl(url);
     }
