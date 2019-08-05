@@ -106,6 +106,8 @@ export class UserOrdersPage implements OnInit{
     this.route.navigateByUrl("/user/order-search")
   }
   openOrderHistory(id:number){
+    this.dataLoader.start=0;
+    this.dataLoader.draw=0;
     this.route.navigateByUrl("/user/orders/history/"+id);
   }
 

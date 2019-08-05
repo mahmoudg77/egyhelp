@@ -52,7 +52,7 @@ export class UserCurrentOrdersPage implements OnInit {
     this.route.navigateByUrl("/user/order-search")
   }
   openOrderHistory(id:number){
-    this.route.navigateByUrl("/user/orders/history/"+id);
+    this.route.navigateByUrl("/user/orders/history/"+id+"/tech");
   }
 
   openClientOrders(id:number){

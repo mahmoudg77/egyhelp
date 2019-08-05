@@ -11,6 +11,7 @@ import { OrdersService } from 'src/app/services/bll/orders.service';
 export class HistoryFinComponent implements OnInit {
   dats: any[];
   complaints: any[];
+  ORDER_NO: number;
 
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
@@ -20,9 +21,8 @@ export class HistoryFinComponent implements OnInit {
   ngOnInit() {
     this.loading.present();
    // console.log(this.route.params);
-      this.route.parent.params.subscribe(params=>{
-        console.log("Params",params.keys);
-        this.order.getOrderFinance(+params['id'],
+   this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
+        this.order.getOrderFinance(this.ORDER_NO,
         next=>{
             this.dats=next;
             this.getComplaints();
@@ -31,8 +31,7 @@ export class HistoryFinComponent implements OnInit {
           error=>{
             this.loading.dismiss()
             
-        })
-      });
+        });
     
  
   }

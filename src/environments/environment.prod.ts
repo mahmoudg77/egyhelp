@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   firebase: {
     apiKey: "AIzaSyBncGKiewy28LJVXA7HRxbOzMtIhpWeBpQ",
     authDomain: "eldawlia-app.firebaseapp.com",

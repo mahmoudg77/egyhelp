@@ -1,6 +1,6 @@
 
 import { LoadingService } from 'src/app/services/loading.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, ParamMap } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from 'src/app/services/bll/orders.service';
 
@@ -15,6 +15,7 @@ export class HistoryTecComponent implements OnInit {
   complaints: any[];
   //closed:boolean=false;
   last_complaint: any;
+  ORDER_NO: number;
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
               private loading:LoadingService,
@@ -22,10 +23,13 @@ export class HistoryTecComponent implements OnInit {
 
   ngOnInit() {
       this.loading.present();
-      // console.log(this.route.params);
-      this.route.parent.params.subscribe(params=>{
+      this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
+        
+   
+      // this.route.parent.params.subscribe(params=>{
+         
         //console.log("Params",params.keys);
-        this.order.getOrderHistory(+params['id'],
+        this.order.getOrderHistory(this.ORDER_NO,
         next=>{
             this.dats=next;
             this.getComplaints();
@@ -34,8 +38,8 @@ export class HistoryTecComponent implements OnInit {
           error=>{
             this.loading.dismiss()
             
-        })
-      });
+        });
+      
     
  
   }

@@ -28,7 +28,7 @@ export class OrderClosePage implements OnInit {
     header: 'حالة الأمر',
     subHeader: ''
   };
-  ord: any;
+  ord: any={};
   submited: boolean;
   constructor(private order:OrdersService,
               private lookup:LookupsService,
