@@ -123,7 +123,7 @@ export class AppComponent  {
     this.statusBar.styleLightContent();
 
       // set status bar to white
-    //this.statusBar.backgroundColorByName("primary");
+    this.statusBar.backgroundColorByName("primary");
    
    
   }

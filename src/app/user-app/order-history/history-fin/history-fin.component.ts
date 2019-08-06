@@ -21,7 +21,7 @@ export class HistoryFinComponent implements OnInit {
   ngOnInit() {
     this.loading.present();
    // console.log(this.route.params);
-   this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
+      this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
         this.order.getOrderFinance(this.ORDER_NO,
         next=>{
             this.dats=next;
@@ -31,8 +31,8 @@ export class HistoryFinComponent implements OnInit {
           error=>{
             this.loading.dismiss()
             
-        });
-    
+        })
+     
  
   }
   orderFilter(ord){

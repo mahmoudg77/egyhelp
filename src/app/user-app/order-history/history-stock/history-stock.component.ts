@@ -11,8 +11,7 @@ import { OrdersService } from 'src/app/services/bll/orders.service';
 export class HistoryStockComponent implements OnInit {
   dats: any[];
   complaints: any[];
-  ORDER_NO: number;
-
+  ORDER_NO:number;
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
               private loading:LoadingService,
@@ -22,7 +21,6 @@ export class HistoryStockComponent implements OnInit {
     this.loading.present();
    // console.log(this.route.params);
    this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
-
         this.order.getOrderStock(this.ORDER_NO,
         next=>{
             this.dats=next;
@@ -32,10 +30,8 @@ export class HistoryStockComponent implements OnInit {
           error=>{
             this.loading.dismiss()
             
-        });
-    
-    
- 
+        })
+      
   }
   orderFilter(ord){
     return this.dats.filter(itm=>itm.COMPLAINT_NO==ord.COMPLAINT_NO)

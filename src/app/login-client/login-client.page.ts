@@ -1,7 +1,7 @@
 import { AuthService } from './../services/auth/auth.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { SharedService } from 'src/app/services/shared.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase/app';
@@ -30,6 +30,7 @@ export class LoginClientPage implements OnInit {
     private formBuilder:FormBuilder,
     // private statusBar:StatusBar,
     private auth:AuthService,
+    private ngzone:NgZone,
     ) { 
     this.loginForm=this.formBuilder.group({
       phone:['',Validators.required],
@@ -42,13 +43,50 @@ export class LoginClientPage implements OnInit {
 
   ngOnInit() {
     this.platform.ready().then(next=>{
+    try {
+      if(this.platform.is("android")){
       this.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container',{
         size:"invisible",
-        
       }); 
       this.recaptchaVerifier.render();
+        //alert('rendered');
+    }
+      } catch (error) {
+       alert(error); 
+      }  
+
     });
-    // this.statusBar.styleDefault();
+
+if(this.platform.is("android")){
+  firebase.auth().onAuthStateChanged(next=>{
+      if(next==null) {
+          this.loadingService.dismiss();
+          //this.step=1;
+          this.toastController.create({message:"null firebase auth",duration:2})
+          return;
+      }
+      next.getIdToken().then(token=>{
+        var idToken=token;
+        this.auth.clientLogin(idToken,
+          next=>{
+            this.router.navigateByUrl("/client/home");
+            if(this.loadingService.isLoading)  
+            this.loadingService.dismiss();
+          },
+          error=>{
+            alert("clientLogin"+error);
+          })
+      },error=>{
+        alert("getIdToken"+error);
+      });
+
+},error=>{
+alert("onAuthStateChanged"+error);
+},()=>{
+
+})
+}  
+// this.statusBar.styleDefault();
     // this.statusBar.isVisible=true;
 
     // // let status bar overlay webview
@@ -56,39 +94,23 @@ export class LoginClientPage implements OnInit {
 
     //   // set status bar to white
     // this.statusBar.backgroundColorByName("primary");
+  //this.FirebaseAuth.
   }
 
   onSubmit(){
+    if(this.platform.is("ios")){
+      
+      this.auth.sendVerifyCode(this.loginForm.get("phone").value,success=>{
+        this.step=1;
+      });
+     return; 
+    }
       this.loadingService.present("جاري التحقق من البيانات ...");
-      firebase.auth().signInWithPhoneNumber("+20"+this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
-        this.verificationId = credential.verificationId;
+      firebase.auth().signInWithPhoneNumber(this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
+        this.verificationId= credential.verificationId;
         
-         firebase.auth().onAuthStateChanged(next=>{
-                if(next==null) {
-                   this.loadingService.dismiss();
-                  this.step=1;
-                  this.toastController.create({message:"null firebase auth",duration:2})
-                  return;
-                }
-                next.getIdToken().then(token=>{
-                  var idToken=token;
-                  this.auth.clientLogin(idToken,
-                    next=>{
-                      this.router.navigateByUrl("/client/home");
-                      if(this.loadingService.isLoading)  
-                      this.loadingService.dismiss();
-                    },
-                    error=>{
-                    })
-                },error=>{
-                });
-         
-         },error=>{
-
-        },()=>{
-
-         })
       }).catch(error=>{
+
         this.toastController.create({message:error,duration:2})
       });
     
@@ -97,8 +119,18 @@ export class LoginClientPage implements OnInit {
   }
 
   onVerify(){
-      if(!this.loadingService.isLoading)this.loadingService.present("جاري التحقق من البيانات ...");
-      const code:string=<string>this.verifyForm.get("verifyCode").value;
+    if(!this.loadingService.isLoading)this.loadingService.present("جاري التحقق من البيانات ...");
+    const code:string=<string>this.verifyForm.get("verifyCode").value;
+    if(this.platform.is("ios")){
+      
+      this.auth.clientLoginByPhone(code,this.loginForm.get("phone").value,success=>{
+        this.router.navigateByUrl("/client/home");
+        if(this.loadingService.isLoading)  
+        this.loadingService.dismiss();
+      });
+     return; 
+    }
+
       let signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, `${code}`);
 
       firebase.auth().signInWithCredential(signInCredential).then((info) => {
@@ -107,7 +139,11 @@ export class LoginClientPage implements OnInit {
       (error) => {
 
       }
+
       );
+
+        
+
   }
 
  

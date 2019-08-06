@@ -22,6 +22,7 @@ export class HistoryServeComponent implements OnInit {
     this.loading.present();
    // console.log(this.route.params);
    this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
+
         this.order.getOrderServes(this.ORDER_NO,
         next=>{
             this.dats=next;
@@ -31,8 +32,9 @@ export class HistoryServeComponent implements OnInit {
           error=>{
             this.loading.dismiss()
             
-        });
-  
+        })
+     
+    
  
   }
   orderFilter(ord){

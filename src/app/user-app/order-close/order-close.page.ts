@@ -21,7 +21,7 @@ export class OrderClosePage implements OnInit {
     status:0
   }
   followActionSheetOptions: any = {
-    header: 'المتابعة',
+    header: 'المتابعة', 
     subHeader: ''
   };
   caseActionSheetOptions: any = {

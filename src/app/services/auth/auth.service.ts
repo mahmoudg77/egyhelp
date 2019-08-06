@@ -101,6 +101,33 @@ export class AuthService {
      
     
   }
+  clientLoginByPhone(otp:string,phone:string,fnNext:any=null,fnError:any=null){
+          this.call.postRequest("/User/loginbyphone",{"otp":otp,"mobile":phone},
+          next=>{
+            this.setUser(next.account);
+            this.setToken(next.token);
+            this.setType(next.type);
+            if(fnNext!=null) fnNext(next);
+          },
+          error=>{
+            this.setToken(null);
+            if(fnError!=null) fnError(error);
+          }
+          )
+    
+  }
+
+  sendVerifyCode(phone:string,fnNext:any=null,fnError:any=null){
+          this.call.postRequest("/User/sendverifycode?mobile="+phone,"",
+          next=>{
+            if(fnNext!=null) fnNext(next);
+          },
+          error=>{
+            if(fnError!=null) fnError(error);
+          }
+        )
+      
+  }
     
   userLogin(username:string,password:string,fnNext:any=null,fnError:any=null){
          this.call.postRequest("/User/UserLogin",{"username":username,"password":password},
