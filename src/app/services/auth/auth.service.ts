@@ -116,6 +116,7 @@ export class AuthService {
           )
     
   }
+  
 
   sendVerifyCode(phone:string,fnNext:any=null,fnError:any=null){
           this.call.postRequest("/User/sendverifycode?mobile="+phone,"",

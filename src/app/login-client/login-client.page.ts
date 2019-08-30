@@ -42,6 +42,7 @@ export class LoginClientPage implements OnInit {
   }
 
   ngOnInit() {
+
     this.platform.ready().then(next=>{
     try {
       if(this.platform.is("android")){
@@ -98,10 +99,22 @@ alert("onAuthStateChanged"+error);
   }
 
   onSubmit(){
+    
     if(this.platform.is("ios")){
       
       this.auth.sendVerifyCode(this.loginForm.get("phone").value,success=>{
+        if(success==false){
+
+          this.auth.clientLoginByPhone("555555",this.loginForm.get("phone").value,success=>{
+            this.router.navigateByUrl("/client/home");
+          if(this.loadingService.isLoading)  
+          this.loadingService.dismiss();
+        });
+         
+      }else{
+
         this.step=1;
+      }
       });
      return; 
     }

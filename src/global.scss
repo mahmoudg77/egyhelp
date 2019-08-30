@@ -20,7 +20,8 @@ ion-toolbar {
 //  }
 ion-content{
     //--background:url('assets/imgs/hexagon-background.png') no-repeat !important;
-    --background:#fce1e1 url('assets/imgs/bg.jpg') no-repeat fixed center;
+    --background:#fce1e1 url('assets/imgs/bg.jpg') no-repeat fixed 0px 0px/100% 100%;
+   
     // a,p,h1,h2,h3{
     //     color:#fad818 !important;
     // }
