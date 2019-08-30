@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { OrderClosePage } from './order-close.page';
+import { StockSelectorComponent } from '../stock-selector/stock-selector.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+  
   ],
-  declarations: [OrderClosePage],
+  declarations: [
+    OrderClosePage,
+    StockSelectorComponent
+  ],
   providers:[
     AsyncPipe
   ]

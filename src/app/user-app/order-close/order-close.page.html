@@ -46,6 +46,9 @@
         <ion-label position="floating" dir="rtl">تقرير الفني </ion-label>
         <ion-textarea name="Notes"  [(ngModel)]="data.Tech_Report" ></ion-textarea>
       </ion-item>
+      <ion-item>
+        <app-stock-selector style="width: 100%"></app-stock-selector>
+      </ion-item>
       <ion-button block color="primary" type="submit" [disabled]="submited" >
         ارسال التقرير
       </ion-button>
