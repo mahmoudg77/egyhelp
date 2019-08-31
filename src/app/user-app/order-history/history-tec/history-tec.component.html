@@ -47,12 +47,12 @@
     </div>
   </section>
 </ion-content>
-<ion-footer *ngIf="last_complaint" >
+<ion-footer *ngIf="(last_complaint||0)!=0||tosure==1" >
     <ion-toolbar>
       <ion-title>
           <ion-button expand="full" color="primary" type="button"  (click)="onAddReport()">
-              <ion-icon slot="start" name="add"></ion-icon>
-              تسجيل التقرير الفني
+              <ion-icon slot="start" *ngIf="tosure!=1" name="add"></ion-icon>
+              {{(tosure==1?'تغير حالة الطلب':'تسجيل التقرير الفني')}}
             </ion-button>
       </ion-title>
     </ion-toolbar>

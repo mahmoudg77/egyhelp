@@ -17,7 +17,7 @@ export class OrdersService {
       recordsFiltered:0,
       data:[],
     };
-
+    public preOrders=[];
    
    getMyOrders(next:any=null,error:any=null,){
      this.api.getRequest("/Order/MyOrders","",data=>{if(next)next(data);},err=>{if(error)error(err);});
@@ -44,8 +44,11 @@ export class OrdersService {
     
     },err=>{if(error)error(err);});
   }
-   closeOrder(request:any,next:any=null,error:any=null,){
+  closeOrder(request:any,next:any=null,error:any=null,){
     this.api.postRequest("/Order/AddReport",request,data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
+  addSureStatus(request:any,next:any=null,error:any=null,){
+    this.api.postRequest("/Order/AddSureStatus",request,data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
   getMyInvoices(next:any=null,error:any=null,){
     this.api.getRequest("/Order/Invoices","",data=>{if(next)next(data);},err=>{if(error)error(err);});
@@ -63,19 +66,20 @@ export class OrdersService {
     this.api.postRequest("/order/Tech/MyOrders?state="+state+"&from="+from+"&to="+to+"&eng_id="+eng_id+"&cst_id="+cst_id,dataLoader,
     resp=>{
        
-      
-      //if(resp){
-        // if(dataLoader.draw==0){
-        //   this.currentOrders=resp;
-        // }else{
-        //   resp.data.forEach(itm => {
-        //     this.currentOrders.data.push(itm);
-        //   }); 
-        // }
         dataLoader.draw++;
         dataLoader.start=dataLoader.length*dataLoader.draw;
         if(next)next(resp);
-      //}
+      
+      },
+      err=>{
+        if(error)error(err);
+      }
+    );
+  }
+  getMyPreOrders(next:any=null,error:any=null){
+    this.api.postRequest("/order/Tech/PreOrders",null,
+    resp=>{
+        if(next)next(resp);
       },
       err=>{
         if(error)error(err);

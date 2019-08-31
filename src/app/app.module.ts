@@ -31,7 +31,7 @@ import { environment } from 'src/environments/environment';
 import { AsyncPipe } from '@angular/common';
 import { Market } from '@ionic-native/market/ngx';
 import { WebIntent } from '@ionic-native/web-intent/ngx';
-import { Firebase } from '@ionic-native/firebase/ngx';
+//import { Firebase } from '@ionic-native/firebase/ngx';
 @NgModule({
   declarations: [AppComponent, StockPipePipe],
   entryComponents: [],
@@ -65,7 +65,7 @@ import { Firebase } from '@ionic-native/firebase/ngx';
     AppVersion,
     Market,
     WebIntent,
-    Firebase
+    //Firebase
 
     
   ],

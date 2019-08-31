@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/user/orders/all"></ion-back-button>
+        </ion-buttons>
+    <ion-title>تأكيد الأوردر</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        {{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}
+        <span style="float: left">#{{ord.ORDER_NO}}</span>
+        
+      </ion-card-title>
+      <ion-card-subtitle>{{ord.NAME}} (<a href="tel:{{ord.MOBIL}}">{{ord.MOBIL}}</a> {{ord.MOBIL1!="0"?"-":""}} <a href="tel:{{ord.MOBIL1}}" *ngIf="ord.MOBIL1!='0'">{{ord.MOBIL1}}</a>)
+        
+      </ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+       
+    <form  (ngSubmit)="onSubmit()">
+      
+      <ion-item>
+        <ion-label position="fixed">حالة الأمر</ion-label>
+        <ion-select [interfaceOptions]="caseActionSheetOptions" interface="action-sheet" okText="موافق" cancelText="خروج من القائمة" name="OrderCase_ID" multiple="false"  (click)="data.Follow_ID=defaults.follow" [(ngModel)]="data.OrderCase_ID" name="OrderCase_ID" placeholder="حالة الأمر">
+          <ion-select-option *ngFor="let s of states" [value]="s.ID">{{s.Name}}</ion-select-option>
+          </ion-select>   
+      </ion-item>
+      <ion-item >
+        <ion-label position="fixed">تاريخ التأكيد</ion-label>
+        <ion-input  name="Action_Date" type="date" [(ngModel)]="data.Action_Date"  ></ion-input>
+      </ion-item>
+     
+      <ion-item>
+        <ion-label position="floating" dir="rtl">بيان التأكيد </ion-label>
+        <ion-textarea name="Notes"  [(ngModel)]="data.Notes" ></ion-textarea>
+      </ion-item>
+      
+      <ion-button block color="primary" type="submit" [disabled]="submited" >
+        حفظ الحالة
+      </ion-button>
+    </form>
+    
+  </ion-card-content>
+</ion-card>
+</ion-content>

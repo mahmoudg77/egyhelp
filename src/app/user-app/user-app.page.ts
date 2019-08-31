@@ -21,6 +21,12 @@ export class UserAppPage implements OnInit {
       onClick:url=>{this.openPage(url)}
     },
     {
+      title: 'اوردرات جديدة',
+      url: '/user/orders/pre',
+      icon: 'filing',
+      onClick:url=>{this.openPage(url)}
+    },
+    {
       title: 'اوردرات اليوم',
       url: '/user/orders/new',
       icon: 'filing',

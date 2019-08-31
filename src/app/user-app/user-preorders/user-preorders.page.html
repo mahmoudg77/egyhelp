@@ -3,17 +3,12 @@
       <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-    <ion-title>نتيجة البحث ({{data.recordsFiltered}})</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="onSearchClick()">
-        <ion-icon slot="icon-only" name="search"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>اوردرات جديدة</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<ion-card *ngFor="let ord of data.data">
+<ion-card *ngFor="let ord of data">
   <ion-card-header>
     <ion-card-title>
       {{ord.TYP_Devices_NAM}} {{ord.MARK_NAM}} {{ord.DEV_CODE=='1'?'':ord.DEV_CODE}}
@@ -105,12 +100,6 @@
     </ion-card-content>
   </ion-card>
 
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-    <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="Loading more data...">
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
 </ion-content>
 <!-- {
   "ORDER_NO": 73,

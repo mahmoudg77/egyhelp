@@ -14,8 +14,9 @@ export class HistoryTecComponent implements OnInit {
   dats: any[];
   complaints: any[];
   //closed:boolean=false;
-  last_complaint: any;
+  last_complaint: any=null;
   ORDER_NO: number;
+  tosure: number=0;
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
               private loading:LoadingService,
@@ -25,6 +26,8 @@ export class HistoryTecComponent implements OnInit {
       this.loading.present();
       // console.log(this.route.params);
       this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
+      this.tosure=+this.route.snapshot.parent.queryParamMap.get('tosure');
+
         //console.log("Params",params.keys);
         this.order.getOrderHistory(this.ORDER_NO,
         next=>{
@@ -45,7 +48,7 @@ export class HistoryTecComponent implements OnInit {
   getComplaints(){
     this.complaints=[];
     this.dats.forEach(itm=>{
-        if(itm.CLOSE_ACTION=="0" && itm.CLOSE_TECH=="0")this.last_complaint=itm;
+        if((itm.CLOSE_ACTION=="0" && itm.CLOSE_TECH=="0") || this.tosure>0 )this.last_complaint=itm;
        if(this.complaints.filter(i=>i.COMPLAINT_NO==itm.COMPLAINT_NO).length==0) this.complaints.push({COMPLAINT_NO:itm.COMPLAINT_NO,COMPLAINT_DATE:itm.COMPLAINT_DATE});
       }
     );
@@ -54,12 +57,22 @@ export class HistoryTecComponent implements OnInit {
   }
 
   onAddReport(){
+
     const params={
       comp_no:this.last_complaint.COMPLAINT_NO,
       order_no:this.last_complaint.ORDER_NO,
       comp_id:this.last_complaint.IDD}
 
+      if(this.tosure==0)
     this.router.navigate(['/','user','orders','close'],{
+      queryParams: params,
+      queryParamsHandling: 'merge',
+      // preserve the existing query params in the route
+      skipLocationChange: true
+      // do not trigger navigation
+    });
+    else 
+    this.router.navigate(['/','user','orders','sure'],{
       queryParams: params,
       queryParamsHandling: 'merge',
       // preserve the existing query params in the route

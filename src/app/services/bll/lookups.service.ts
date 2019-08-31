@@ -31,4 +31,7 @@ export class LookupsService {
   getOrderStates(next:any=null,error:any=null){
     this.api.getRequest("/Lookup/OrderStates","",data=>{if(next)next(data);},err=>{if(error)error(err);});
   }
+  getOrderSures(next:any=null,error:any=null){
+    this.api.getRequest("/Lookup/OrderSures","",data=>{if(next)next(data);},err=>{if(error)error(err);});
+  }
 }

@@ -21,6 +21,7 @@ const routes: Routes = [
       //   component:UserOrdersPage
       // },
       { path: 'new', loadChildren: './../user-current-orders/user-current-orders.module#UserCurrentOrdersPageModule' },
+      { path: 'pre', loadChildren: './../user-preorders/user-preorders.module#UserPreOrdersPageModule' },
       {
         path: 'all',
         component:UserOrdersPage
@@ -36,6 +37,10 @@ const routes: Routes = [
       {
         path: 'close',
         loadChildren: './../order-close/order-close.module#OrderClosePageModule'
+      },
+      {
+        path: 'sure',
+        loadChildren: './../preorder-close/preorder-close.module#PreOrderClosePageModule'
       },
    
    

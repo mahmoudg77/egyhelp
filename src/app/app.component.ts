@@ -9,7 +9,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import { Firebase } from '@ionic-native/firebase/ngx';
+//import { Firebase } from '@ionic-native/firebase/ngx';
 import { AppSettingsService } from './services/bll/app-settings.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
  
@@ -28,7 +28,7 @@ export class AppComponent  {
     private statusBar: StatusBar,
     private auth:AuthService,
     private router:Router,
-    private fb:Firebase,
+    //private fb:Firebase,
     private settings:AppSettingsService,
     private appVersion:AppVersion,
     private dialogs:AlertController,
@@ -102,15 +102,26 @@ export class AppComponent  {
       firebase.initializeApp(environment.firebase);
       this.splashScreen.hide();
       
-      this.fb.onNotificationOpen()
-      .subscribe(data =>{
+      // this.fb.onNotificationOpen()
+      // .subscribe(data =>{
         
+      //   this.router.navigateByUrl(data.route);
+      // }
+      // );
+      firebase.messaging().onMessage(
+            data =>{
         this.router.navigateByUrl(data.route);
       }
       );
       
-      this.fb.onTokenRefresh()
-      .subscribe((token: string) => {
+    //   this.fb.onTokenRefresh()
+    //   .subscribe((token: string) => {
+    //     if(this.auth.getToken())
+    //     this.auth.saveNewDeviceID(token);
+    //   });
+    // });
+    firebase.messaging().onTokenRefresh(
+      (token: string) => {
         if(this.auth.getToken())
         this.auth.saveNewDeviceID(token);
       });
