@@ -47,6 +47,7 @@ export class LoginUserPage implements OnInit {
     next=>{
       this.loadingService.dismiss();
       this.router.navigateByUrl("/user/home");
+      
     },
     error=>{
       this.loadingService.dismiss();

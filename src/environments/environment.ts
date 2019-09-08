@@ -23,7 +23,7 @@ export const environment = {
   //apiUrl:"http://localhost:61852"
    //apiUrl:"https://dawlia.nearyouweb.com"
    //apiUrl:"http://41.32.248.67"
-   apiUrl:"https://tawkeel.site"
+    apiUrl:"https://tawkeel.site"
 
 };
 

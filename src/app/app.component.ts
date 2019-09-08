@@ -1,3 +1,4 @@
+import { FCM } from '@ionic-native/fcm/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { AuthService } from './services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 //import { Firebase } from '@ionic-native/firebase/ngx';
 import { AppSettingsService } from './services/bll/app-settings.service';
 import { AppVersion } from '@ionic-native/app-version/ngx';
- 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -32,7 +33,8 @@ export class AppComponent  {
     private settings:AppSettingsService,
     private appVersion:AppVersion,
     private dialogs:AlertController,
-    private market:Market
+    private market:Market,
+    private fcm: FCM,
   ) {
     this.initializeApp();
     
@@ -108,6 +110,11 @@ export class AppComponent  {
       //   this.router.navigateByUrl(data.route);
       // }
       // );
+      // this.fcm.onNotification().subscribe(
+      //       data =>{
+      //   this.router.navigateByUrl(data.route);
+      // }
+      // );
       firebase.messaging().onMessage(
             data =>{
         this.router.navigateByUrl(data.route);
@@ -120,12 +127,23 @@ export class AppComponent  {
     //     this.auth.saveNewDeviceID(token);
     //   });
     // });
-    firebase.messaging().onTokenRefresh(
+    if(this.auth.getToken())
+    this.fcm.getToken().then(token=>{
+      this.auth.saveNewDeviceID(token);
+    })
+ 
+    this.fcm.onTokenRefresh().subscribe(
       (token: string) => {
         if(this.auth.getToken())
         this.auth.saveNewDeviceID(token);
       });
     });
+    // firebase.messaging().onTokenRefresh(
+    //   (token: string) => {
+    //     if(this.auth.getToken())
+    //     this.auth.saveNewDeviceID(token);
+    //   });
+    // });
     
     this.statusBar.styleDefault();
     this.statusBar.isVisible=true;
@@ -134,7 +152,7 @@ export class AppComponent  {
     this.statusBar.styleLightContent();
 
       // set status bar to white
-    this.statusBar.backgroundColorByName("primary");
+   // this.statusBar.backgroundColorByName("primary");
    
    
   }

@@ -7,7 +7,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
   styleUrls: ['./my-orders.page.scss'],
 })
 export class MyOrdersPage implements OnInit {
-  @ViewChild(MyOrdersComponent) myOrders:MyOrdersComponent
+  @ViewChild(MyOrdersComponent,{static: true}) myOrders:MyOrdersComponent
   constructor() { }
 
   ngOnInit() {

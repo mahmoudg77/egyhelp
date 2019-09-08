@@ -33,7 +33,7 @@ export class UserOrdersPage implements OnInit{
     cst_id:0,
     eng_id:0
   }
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll,{static: true}) infiniteScroll: IonInfiniteScroll;
   constructor(public order:OrdersService,private router:ActivatedRoute,private route:Router,
     private platform:Platform,
     private loading:LoadingService) { }

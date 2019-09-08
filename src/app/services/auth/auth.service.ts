@@ -1,9 +1,10 @@
+import { FCM } from '@ionic-native/fcm/ngx';
 import { apiError } from './../dal/api-result';
 import { CallapiService } from './../dal/callapi.service';
 import { Injectable } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { environment } from 'src/environments/environment';
-//import { Firebase } from '@ionic-native/firebase/ngx';
+// import { Firebase } from '@ionic-native/firebase/ngx';
 import * as firebase from 'firebase/app';
 import 'firebase/messaging';
 import { Storage } from '@ionic/storage';
@@ -14,7 +15,8 @@ export class AuthService {
  public isLoggedIn:boolean=false;
  //user: any=null;
   constructor( private call:CallapiService,//private firebase:Firebase,
-    private storage:Storage
+    private storage:Storage,
+    private fcm:FCM
       ) {
  
   }
@@ -83,7 +85,7 @@ export class AuthService {
   }
 
   clientLogin(token:string,fnNext:any=null,fnError:any=null){
-      firebase.messaging().getToken().then(deviceID=>{
+      this.fcm.getToken().then(deviceID=>{
           this.call.postRequest("/User/login",{"firebase_token":token,"device_id":deviceID},
           next=>{
             this.setUser(next.account);
@@ -136,6 +138,10 @@ export class AuthService {
           this.setUser(next.account);
           this.setToken(next.token);
           this.setType(next.type);
+          if(this.getToken())
+          this.fcm.getToken().then(token=>{
+            this.saveNewDeviceID(token);
+          })
           if(fnNext!=null) fnNext(next);
         },
         error=>{

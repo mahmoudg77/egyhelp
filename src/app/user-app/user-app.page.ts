@@ -3,7 +3,7 @@ import { Platform } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+// import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { filter } from 'rxjs/operators';
 
@@ -78,7 +78,7 @@ export class UserAppPage implements OnInit {
     // private statusBar: StatusBar,
     private auth:AuthService,
     private router:Router,
-    private inappbrowser:InAppBrowser,
+    // private inappbrowser:InAppBrowser,
     private platform:Platform,
     private settings:AppSettingsService
 ){
@@ -123,11 +123,11 @@ logout(){
 
 
   openWebSite(url:string){
-    if(this.platform.is("android")||this.platform.is("ios")){
-      this.inappbrowser.create(url,"_self").show();
-    }else{
+    // if(this.platform.is("android")||this.platform.is("ios")){
+    //   this.inappbrowser.create(url,"_self").show();
+    // }else{
       window.open(url,"_self");
-    }
+    // }
   }
   openPage(url:string){
     this.router.navigateByUrl(url);

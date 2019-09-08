@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, Input,EventEmitter } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { StockService } from 'src/app/services/bll/stock.service';
 
@@ -9,29 +9,32 @@ import { StockService } from 'src/app/services/bll/stock.service';
 })
 export class StockSelectorComponent implements OnInit {
   stockItems:any[];
-  data:any[]=[];
+  //data:any[]=[];
   constructor(public actionSheetController: ActionSheetController,private stock:StockService) { }
+
+  @Input() data:any[];
+  @Output() onSelectedChange: EventEmitter<any[]> = new EventEmitter<any[]>();
 
   ngOnInit() {
     this.stock.getMyStock(
       next=>{
-        //this.data=next;
         this.stockItems=next.filter(itm=>itm.Balance>0);
-       
       },
       err=>{
-
       }
     )
   }
- 
+  ngOnChanges() {
+    console.log("Selected equals: ", this.data);
+  }
   addItemToList(item){
     const old=this.data.filter(a=>a.id==item.id);
     if(old.length>0)old[0].qty++;
     else
     this.data.push(item);
-  }
 
+  }
+  
   async addItem(){
     var btns=[];
     this.stockItems.forEach(a=>{
@@ -39,10 +42,10 @@ export class StockSelectorComponent implements OnInit {
       btns.push({text:a.PART_NAM,handler: () => {
         this.addItemToList({name:a.PART_NAM,id:a.PART_NO,qty:1});
         a.Balance--;
-
+        
       }})
     });
-     const actionSheet = await this.actionSheetController.create({
+    const actionSheet = await this.actionSheetController.create({
       header: 'قطع الغيار المتوفرة',
       buttons: btns
     });
@@ -53,7 +56,6 @@ export class StockSelectorComponent implements OnInit {
     if(index>-1){
       this.stockItems.filter(a=>a.PART_NO==item.id)[0].Balance+=item.qty;
       this.data.splice(index,1);
-
     }
   }
 }

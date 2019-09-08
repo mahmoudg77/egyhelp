@@ -23,7 +23,7 @@ export class DevicesComponent implements OnInit {
   }
   //step: number=1;
   public env=environment;
-  @ViewChild(IonSlides) slides:IonSlides;
+  @ViewChild(IonSlides,{static: true}) slides:IonSlides;
   DeviceTypes: any[];
   Marks: any[];
   filteredMarks: any;

@@ -1,11 +1,12 @@
+import { LoadingService } from './../services/loading.service';
 import { AppSettingsService } from './../services/bll/app-settings.service';
 import { Platform } from '@ionic/angular';
 import { AuthService } from './../services/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { WebIntent } from '@ionic-native/web-intent/ngx';
+// import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+// import { WebIntent } from '@ionic-native/web-intent/ngx';
 
 @Component({
     selector: './client-app',
@@ -95,10 +96,11 @@ export class ClientAppComponent implements OnInit {
         // private statusBar: StatusBar,
         private auth:AuthService,
         private router:Router,
-        private inappbrowser:InAppBrowser,
+        // private inappbrowser:InAppBrowser,
         private platform:Platform,
         private settings:AppSettingsService,
-        private webIntent:WebIntent
+        // private webIntent:WebIntent,
+        private loading:LoadingService
     ){
 
     }
@@ -109,24 +111,26 @@ export class ClientAppComponent implements OnInit {
 
     }
     openWebSite(url:string){
-      if(this.platform.is("android")||this.platform.is("ios")){
+      //if(this.platform.is("android")||this.platform.is("ios")){
         //this.inappbrowser.create(url,"_self").show();
+        this.loading.present();
         window.open(url,"_self");
-      }else{
-        window.open(url,"_self");
-      }
+        this.loading.dismiss()
+      // }else{
+      //   window.open(url,"_self");
+      // }
     }
 
-    openIntent(url:string,intent:string){
-      const options = {
-        action: this.webIntent.ACTION_VIEW,
-        url: url,
-        package:intent,//"com.whatsapp",
+    // openIntent(url:string,intent:string){
+    //   const options = {
+    //     action: this.webIntent.ACTION_VIEW,
+    //     url: url,
+    //     package:intent,//"com.whatsapp",
        
-      };
-      //this.share.shareVia("","","");
-      this.webIntent.startActivity(options).then(next=>{}, error=>{alert(error)});
-    }
+    //   };
+    //   //this.share.shareVia("","","");
+    //   this.webIntent.startActivity(options).then(next=>{}, error=>{alert(error)});
+    // }
     openPage(url:string){
       this.router.navigateByUrl(url);
     }

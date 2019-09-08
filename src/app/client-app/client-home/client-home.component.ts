@@ -24,7 +24,7 @@ export class ClientHomeComponent implements OnInit {
       };
     env=environment;
 
-    @ViewChild(IonSlides) slider:IonSlides;
+    @ViewChild(IonSlides,{static: true}) slider:IonSlides;
     ngOnInit(): void {
        this.counter.getClientCounters(
            next=>{

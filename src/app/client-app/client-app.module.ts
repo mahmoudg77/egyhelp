@@ -1,4 +1,4 @@
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+// import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { NewOrderPageModule } from './new-order/new-order.module';
 import { EditProfilePageModule } from './edit-profile/edit-profile.module';
 import { AppComponent } from './../app.component';
@@ -64,7 +64,7 @@ const routes: Routes = [
        
     ],
     providers:[
-      InAppBrowser
+      // InAppBrowser
     ],
     exports: [
       ClientAppComponent,

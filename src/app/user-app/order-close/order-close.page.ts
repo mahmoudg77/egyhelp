@@ -40,12 +40,12 @@ export class OrderClosePage implements OnInit {
               private auth:AuthService) {
     this.data.Follow_ID=this.defaults.follow;
     //this.data.OrderCase_ID=this.defaults.status;
-    
+    this.data.StockItems=[];
+
   }
   
   ngOnInit() {
     this.loading.present();
-    
     this.lookup.getFollowStates(
       next=>{
         this.follows=next;
@@ -68,12 +68,14 @@ export class OrderClosePage implements OnInit {
           this.order.getTechOrderDetails(this.data.Comp_ID,
             next=>{
               this.ord=next;
+              this.loading.dismiss();
             })
         })
        
   }
    onSubmit(){
     this.submited=true;
+    
     this.loading.present("جاري الحفظ ...");
     if(this.data.OrderCase_ID==this.defaults.status && this.data.Follow_ID==this.defaults.follow){
       this.toaster.create({message:"اختر حالة الطلب او المتابعة",duration:2000}).then(toast=>{toast.present()});

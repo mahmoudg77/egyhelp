@@ -26,7 +26,7 @@ export class UserHomeComponent implements OnInit {
       };
     env=environment;
 
-    @ViewChild(IonSlides) slider:IonSlides;
+    @ViewChild(IonSlides,{static: true}) slider:IonSlides;
     ngOnInit(event=null): void {
        this.counter.getUserCounters(
            next=>{

@@ -17,7 +17,7 @@ export class MyDevicesComponent implements OnInit {
   env=environment;
   filtered:any[];
 
-  @ViewChild(IonSearchbar) searchBar:IonSearchbar;
+  @ViewChild(IonSearchbar,{static: true}) searchBar:IonSearchbar;
   constructor(private  lookups:LookupsService,
     private router:Router,
     private auth:AuthService,

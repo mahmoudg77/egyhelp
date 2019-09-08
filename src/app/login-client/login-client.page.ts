@@ -58,35 +58,9 @@ export class LoginClientPage implements OnInit {
 
     });
 
-if(this.platform.is("android")){
-  firebase.auth().onAuthStateChanged(next=>{
-      if(next==null) {
-          this.loadingService.dismiss();
-          //this.step=1;
-          this.toastController.create({message:"null firebase auth",duration:2})
-          return;
-      }
-      next.getIdToken().then(token=>{
-        var idToken=token;
-        this.auth.clientLogin(idToken,
-          next=>{
-            this.router.navigateByUrl("/client/home");
-            if(this.loadingService.isLoading)  
-            this.loadingService.dismiss();
-          },
-          error=>{
-            alert("clientLogin"+error);
-          })
-      },error=>{
-        alert("getIdToken"+error);
-      });
-
-},error=>{
-alert("onAuthStateChanged"+error);
-},()=>{
-
-})
-}  
+// if(this.platform.is("android")){
+  
+// }  
 // this.statusBar.styleDefault();
     // this.statusBar.isVisible=true;
 
@@ -103,25 +77,56 @@ alert("onAuthStateChanged"+error);
     if(this.platform.is("ios")){
       
       this.auth.sendVerifyCode(this.loginForm.get("phone").value,success=>{
-        if(success==false){
+        //if(success==false){
+          //   this.auth.clientLoginByPhone("555555",this.loginForm.get("phone").value,success=>{
+          //     this.router.navigateByUrl("/client/home");
+          //   if(this.loadingService.isLoading)  
+          //   this.loadingService.dismiss();
+          // });
+          // if(this.loadingService.isLoading)  
+          // this.loadingService.dismiss();
+          // this.router.navigateByUrl("/client/home");
+          //this.step=1;
+      if(success==false){
 
-          this.auth.clientLoginByPhone("555555",this.loginForm.get("phone").value,success=>{
-            this.router.navigateByUrl("/client/home");
-          if(this.loadingService.isLoading)  
-          this.loadingService.dismiss();
+          this.step=1;
+                    // if(this.loadingService.isLoading)  
+          // this.loadingService.dismiss();
+
+          }
         });
-         
-      }else{
-
-        this.step=1;
-      }
-      });
-     return; 
+      return; 
     }
-      this.loadingService.present("جاري التحقق من البيانات ...");
-      firebase.auth().signInWithPhoneNumber(this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
+
+    //console.log(this.loginForm.get("phone").value);
+    this.loadingService.present("جاري التحقق من البيانات ...");
+      firebase.auth().signInWithPhoneNumber("+20"+this.loginForm.get("phone").value,this.recaptchaVerifier).then(credential=>{
         this.verificationId= credential.verificationId;
         
+        firebase.auth().onAuthStateChanged(next=>{
+          if(next==null) {
+             this.loadingService.dismiss();
+            this.step=1;
+            this.toastController.create({message:"null firebase auth",duration:2})
+            return;
+          }
+          next.getIdToken().then(token=>{
+            var idToken=token;
+            this.auth.clientLogin(idToken,
+              next=>{
+                this.router.navigateByUrl("/client/home");
+                if(this.loadingService.isLoading)  
+                this.loadingService.dismiss();
+              },
+              error=>{
+              })
+          },error=>{
+          });
+        },error=>{
+
+        },()=>{
+
+         })
       }).catch(error=>{
 
         this.toastController.create({message:error,duration:2})
@@ -133,9 +138,9 @@ alert("onAuthStateChanged"+error);
 
   onVerify(){
     if(!this.loadingService.isLoading)this.loadingService.present("جاري التحقق من البيانات ...");
+    
     const code:string=<string>this.verifyForm.get("verifyCode").value;
     if(this.platform.is("ios")){
-      
       this.auth.clientLoginByPhone(code,this.loginForm.get("phone").value,success=>{
         this.router.navigateByUrl("/client/home");
         if(this.loadingService.isLoading)  
@@ -147,7 +152,7 @@ alert("onAuthStateChanged"+error);
       let signInCredential = firebase.auth.PhoneAuthProvider.credential(this.verificationId, `${code}`);
 
       firebase.auth().signInWithCredential(signInCredential).then((info) => {
-        
+       
       }, 
       (error) => {
 
