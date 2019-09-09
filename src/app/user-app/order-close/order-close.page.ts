@@ -111,6 +111,7 @@ export class OrderClosePage implements OnInit {
 
       return ;
     }
+   
 
     this.order.closeOrder(this.data,
       next=>{

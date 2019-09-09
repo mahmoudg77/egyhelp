@@ -48,11 +48,11 @@
       </ion-item>
       <ion-item>
         <ion-label position="fixed">دفع مبلغ </ion-label>
-        <ion-input  name="Cost" type="number" [(ngModel)]="data.Cost"></ion-input>
+        <ion-input  name="Cost" inputmode="numeric" type="number" [(ngModel)]="data.Cost"></ion-input>
       </ion-item>
       <ion-item *ngIf="data.Follow_ID==1 && (data.OrderCase_ID==2 || data.OrderCase_ID==4)">
         <ion-label position="fixed">الضمان </ion-label>
-        <ion-input [(ngModel)]="data.Warranty" maxLength="24" minLength="0" name="Warranty" placeholder="الضمان بالشهر">
+        <ion-input [(ngModel)]="data.Warranty" max="24" min="0" name="Warranty" inputmode="numeric" placeholder="الضمان بالشهر">
         </ion-input>      
       </ion-item>
       <ion-item>
