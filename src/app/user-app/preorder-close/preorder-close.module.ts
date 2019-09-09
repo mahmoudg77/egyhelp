@@ -6,7 +6,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PreOrderClosePage } from './preorder-close.page';
-import { StockSelectorComponent } from '../stock-selector/stock-selector.component';
 
 const routes: Routes = [
   {
@@ -24,9 +23,8 @@ const routes: Routes = [
   
   ],
   declarations: [
-    PreOrderClosePage,
-    StockSelectorComponent
-  ],
+    PreOrderClosePage
+    ],
   providers:[
     AsyncPipe
   ]

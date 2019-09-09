@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.webegy.aldawlia" version="2.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.webegy.aldawlia" version="2.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>الدولية للصيانة</name>
     <description>لأعطال الأجهزة الكهربية</description>
     <author email="info@web-egy.com" href="http://web-egy.com/">Webegy team</author>
@@ -17,7 +17,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="whatsapp:*" />
     <allow-intent href="geo:*" />
-    <access launch-external="yes" origin="whatsapp:" />
+    <access launch-external="yes" origin="whatsapp//*" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
@@ -28,7 +28,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
         <allow-intent href="market:*" />
-        <preference name="android-targetSdkVersion" value="28" />
+        <preference name="android-targetSdkVersion" value="16" />
         <plugin name="cordova-android-support-gradle-release">
             <variable name="ANDROID_SUPPORT_VERSION" value="28.+" />
         </plugin>

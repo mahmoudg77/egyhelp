@@ -104,6 +104,13 @@ export class OrderClosePage implements OnInit {
 
       return ;
     }
+    if(this.data.Warranty>24 ||this.data.Warranty<0){
+      this.toaster.create({message:"فترة الضمان غير منطقية ",duration:2000}).then(toast=>{toast.present()})
+      this.loading.dismiss();
+      this.submited=false;
+
+      return ;
+    }
 
     this.order.closeOrder(this.data,
       next=>{

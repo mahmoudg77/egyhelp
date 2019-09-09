@@ -86,7 +86,7 @@ export class PreOrderClosePage implements OnInit {
 
     this.order.addSureStatus(this.data,
       next=>{
-      
+        this.order.preOrders=[];
         this.auth.getUser().then(user=>{
           this.order.getMyPreOrders(
             next=>{

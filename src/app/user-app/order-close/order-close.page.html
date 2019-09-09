@@ -52,9 +52,8 @@
       </ion-item>
       <ion-item *ngIf="data.Follow_ID==1 && (data.OrderCase_ID==2 || data.OrderCase_ID==4)">
         <ion-label position="fixed">الضمان </ion-label>
-        <ion-select   name="Warranty" multiple="false"   [(ngModel)]="data.Warranty" name="Warranty" placeholder="الضمان بالشهر">
-          <ion-select-option *ngFor="let w of [0,1,2,3,4,5,6]"  [value]="w">{{w}} شهر</ion-select-option>
-        </ion-select>      
+        <ion-input [(ngModel)]="data.Warranty" maxLength="24" minLength="0" name="Warranty" placeholder="الضمان بالشهر">
+        </ion-input>      
       </ion-item>
       <ion-item>
         <app-stock-selector  [(data)]="data.StockItems" style="width: 100%"></app-stock-selector>
