@@ -38,11 +38,20 @@ export class UserHomeComponent implements OnInit {
                 this.loadSlider(event)
            }
        )
-       this.platform.backButton.subscribe(()=>{
-        if(this.router.url=="/user/home") {
-            navigator['app'].exitApp();
-        } 
-        })
+        this.orders.getMyPreOrders(
+          next=>{
+            this.orders.preOrders=next;
+            
+             
+          },
+          error=>{
+            
+
+          }
+          );
+         
+      
+     
        
     }
     loadSlider(event=null){
@@ -59,9 +68,14 @@ export class UserHomeComponent implements OnInit {
             });
         });
     }
-    constructor(public counter:CounterService,private router:Router,private settings:AppSettingsService,private platform:Platform){
-         
-    }
+    constructor(public counter:CounterService,
+        private router:Router,
+        private settings:AppSettingsService,
+        private platform:Platform,
+        public orders:OrdersService){
+
+            
+     }
 
 
     openCurrentOrders(){
@@ -72,6 +86,9 @@ export class UserHomeComponent implements OnInit {
     }
     openStock(){
         this.router.navigateByUrl("/user/stock")
+    }
+    openPerOrders(){
+        this.router.navigateByUrl("/user/orders/pre")
     }
     
     
