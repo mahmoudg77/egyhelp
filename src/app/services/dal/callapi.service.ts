@@ -9,14 +9,12 @@ import { Guid } from 'guid-typescript';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { SharedService } from '../shared.service';
-//import { FirebaseCrashlytics } from '@ionic-native/firebase-crashlytics/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-import { Serializer } from '@angular/compiler';
 
 
 @Injectable()
 export class CallapiService {
-  version:string;
+  version:string="2.0.4";
   package:string;
   constructor(
     public http:HttpClient,
@@ -27,54 +25,58 @@ export class CallapiService {
     private platform:Platform
     ) { 
       //this.crashlytic.initialise();
-    if(!platform.is('ios') && !platform.is('android')) return;
-      appVersion.getVersionNumber().then((ver:string)=>{
-        this.version=ver;
-      });
-      appVersion.getPackageName().then(id=>{
-        this.package=id;
-      })
+    //if(!this.platform.is('ios') && !this.platform.is('android')) return;
+    this.getVersion();
   }
-  
+  getVersion(){
+    this.appVersion.getVersionNumber().then((ver:string)=>{
+      this.version=ver;
+    });
+    this.appVersion.getPackageName().then(id=>{
+      this.package=id;
+    })
+  }
   getToken() {
     let token= localStorage.getItem(environment.tokenKey) || null;
     if(token==null) return null;
     return Guid.isGuid(token)?token:null;
- }
- getType() {
-  return localStorage.getItem(environment.typeKey) || null;
-}
+  }
+  getType() {
+    return localStorage.getItem(environment.typeKey) || null;
+  }
   
   getRequest(url:string,pars:any,success_callbak:any,error_callback:any=null){
-     let parms=stringify(pars);
-     let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
-     if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
-     if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
-     if(this.version!=null )  headers=headers.append("APP_VER",this.version);
-
+    let parms=stringify(pars);
+    let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
+    this.getVersion();
+    if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
+    if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
+    if(this.version!=null )  headers=headers.append("APP_VER",this.version);
+    
      this.http.get(environment.apiUrl +  url +(parms?"?":"")+parms,{headers})
-                      .pipe(map((result:apiResult)=>{return result}))
+     .pipe(map((result:apiResult)=>{return result}))
                       .subscribe(
-                            next=>{
-                            if (next.isSuccess) {
+                        next=>{
+                          if (next.isSuccess) {
                                 success_callbak(next.data);              
-                            } else {
-                              this.logException("GET " +url,headers,pars,next);
-                              this.softErrorHandling({code:next.code,message:next.message});
-                              if(error_callback!=undefined)  error_callback(next.message);
+                              } else {
+                                this.logException("GET " +url,headers,pars,next);
+                                this.softErrorHandling({code:next.code,message:next.message});
+                                if(error_callback!=undefined)  error_callback(next.message);
                             }
-                            },
-                            error=>{
-                              this.logException("GET " +url,headers,pars,error);
-                              if(error_callback!=undefined)  error_callback(error.statusText);
-                              this.errorHandling(error);
-                            }
+                          },
+                          error=>{
+                            this.logException("GET " +url,headers,pars,error);
+                            if(error_callback!=undefined)  error_callback(error.statusText);
+                            this.errorHandling(error);
+                          }
                           );
   }
-
-    postRequest(url:string,pars:any,success_callbak:any=null,error_callback:any=null){
-
+  
+  postRequest(url:string,pars:any,success_callbak:any=null,error_callback:any=null){
+    
     let headers:HttpHeaders= new HttpHeaders({"APP_KEY":environment.apiKey});
+    this.getVersion();
     if(this.getType()!=null) headers=headers.append("AUTH_TYPE",this.getType());
     if(this.getToken()!=null ) headers=headers.append("AUTH_KEY",this.getToken());
     if(this.version!=null )  headers=headers.append("APP_VER",this.version);
