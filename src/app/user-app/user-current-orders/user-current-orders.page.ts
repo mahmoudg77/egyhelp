@@ -51,8 +51,9 @@ export class UserCurrentOrdersPage implements OnInit {
   onSearchClick(){
     this.route.navigateByUrl("/user/order-search")
   }
-  openOrderHistory(id:number){
-    this.route.navigateByUrl("/user/orders/history/"+id);
+  
+  openOrderHistory(id:number,comp_no:number){
+    this.route.navigateByUrl("/user/orders/history/"+id+"?comp_no=" + comp_no+"&tosure=0");
   }
 
   openClientOrders(id:number){

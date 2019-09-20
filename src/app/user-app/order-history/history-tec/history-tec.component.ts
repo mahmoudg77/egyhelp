@@ -17,6 +17,7 @@ export class HistoryTecComponent implements OnInit {
   last_complaint: any=null;
   ORDER_NO: number;
   tosure: number=0;
+  comp_no: number;
   constructor(private order:OrdersService,
               private route:ActivatedRoute,
               private loading:LoadingService,
@@ -27,6 +28,7 @@ export class HistoryTecComponent implements OnInit {
       // console.log(this.route.params);
       this.ORDER_NO=+this.route.snapshot.parent.paramMap.get('id');
       this.tosure=+this.route.snapshot.parent.queryParamMap.get('tosure');
+      this.comp_no=+this.route.snapshot.parent.queryParamMap.get('comp_no');
 
         //console.log("Params",params.keys);
         this.order.getOrderHistory(this.ORDER_NO,
@@ -59,8 +61,8 @@ export class HistoryTecComponent implements OnInit {
   onAddReport(){
 
     const params={
-      comp_no:this.last_complaint.COMPLAINT_NO,
-      order_no:this.last_complaint.ORDER_NO,
+      comp_no:this.comp_no,//this.last_complaint.COMPLAINT_NO,
+      order_no:this.ORDER_NO,//this.last_complaint.ORDER_NO,
       comp_id:this.last_complaint.IDD}
 
       if(this.tosure==0)
