@@ -55,6 +55,11 @@
         <ion-input [(ngModel)]="data.Warranty" max="24" min="0" name="Warranty" inputmode="numeric" placeholder="الضمان بالشهر">
         </ion-input>      
       </ion-item>
+      <ion-item *ngIf="data.OrderCase_ID==2 || data.OrderCase_ID==4">
+        <ion-label position="fixed">رقم الفاتورة </ion-label>
+        <ion-input [(ngModel)]="data.Invoice_No" name="Invoice_No" inputmode="numeric" placeholder="eg.012345">
+        </ion-input>      
+      </ion-item>
       <ion-item>
         <app-stock-selector  [(data)]="data.StockItems" style="width: 100%"></app-stock-selector>
       </ion-item>

@@ -9,6 +9,7 @@ import { StockService } from 'src/app/services/bll/stock.service';
 export class StockPage implements OnInit {
   data: any[];
   filtered:any[];
+  TotalCost:number=0
   constructor(private stock:StockService) { }
 
   ngOnInit(event=null) {
@@ -16,6 +17,9 @@ export class StockPage implements OnInit {
       next=>{
         this.data=next;
         this.filtered=next.filter(itm=>itm.Balance>0);
+        this.TotalCost=this.filtered.reduce((sum,a)=>sum+(a.Balance*a.PART_MRK_COST),0);
+        // this.TotalCost=0;
+        // this.filtered.forEach(a=>{this.TotalCost+= a.Balance*a.PART_MRK_COST});
         if(event) event.target.complete();
       },
       err=>{

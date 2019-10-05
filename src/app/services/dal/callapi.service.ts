@@ -14,7 +14,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Injectable()
 export class CallapiService {
-  version:string="2.0.4";
+  version:string=environment.version;
   package:string;
   constructor(
     public http:HttpClient,
