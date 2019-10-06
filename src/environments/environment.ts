@@ -24,7 +24,7 @@ export const environment = {
    //apiUrl:"https://dawlia.nearyouweb.com",
   //  apiUrl:"http://41.32.248.67",
      apiUrl:"https://tawkeel.site",
-  version:'2.0.7'
+  version:'2.0.8'
 };
 
 /*

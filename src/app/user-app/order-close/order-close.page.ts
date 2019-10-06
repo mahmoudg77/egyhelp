@@ -112,7 +112,13 @@ export class OrderClosePage implements OnInit {
       return ;
     }
    
+    if(this.data.Cost>0 && (this.data.Invoice_No||'')==''){
+        this.toaster.create({message:"ادخل رقم الفاتورة ",duration:2000}).then(toast=>{toast.present()})
+        this.loading.dismiss();
+        this.submited=false;
 
+        return ;
+      }
     this.order.closeOrder(this.data,
       next=>{
         // const orders =this.order.currentOrders.data.filter(a=>a.ORDER_NO==this.data.Order_No);
