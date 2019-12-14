@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>201049171394-08ike625u3q5tapms6pg45p44hok0r9s.apps.googleusercontent.com</string>
+	<string>549829545903-1040t133afqlhrsttkqf9ocajok037ou.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.201049171394-08ike625u3q5tapms6pg45p44hok0r9s</string>
+	<string>com.googleusercontent.apps.549829545903-1040t133afqlhrsttkqf9ocajok037ou</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBk5uelHTumvLzrQ0nJVpgL5IHGrHuXevA</string>
+	<string>AIzaSyBwvB8Qj8zoAUTsBkvlRtTcwuULTjFXiEE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>201049171394</string>
+	<string>549829545903</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.webegy.aldawlia</string>
+	<string>com.webegy.irepair</string>
 	<key>PROJECT_ID</key>
-	<string>eldawlia-app</string>
+	<string>irepair16381</string>
 	<key>STORAGE_BUCKET</key>
-	<string>eldawlia-app.appspot.com</string>
+	<string>irepair16381.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:201049171394:ios:fb807b7f22fc10c3</string>
+	<string>1:549829545903:ios:755534a004809d566b295a</string>
 	<key>DATABASE_URL</key>
-	<string>https://eldawlia-app.firebaseio.com</string>
+	<string>https://irepair16381.firebaseio.com</string>
 </dict>
 </plist>

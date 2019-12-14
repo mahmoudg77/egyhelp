@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.webegy.aldawlia" version="2.0.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>الدولية للصيانة</name>
+<widget id="com.webegy.irepair" version="1.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ايجي هيلب</name>
     <description>لأعطال الأجهزة الكهربية</description>
     <author email="info@web-egy.com" href="http://web-egy.com/">Webegy team</author>
     <content src="index.html" />
@@ -27,6 +27,9 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
         <allow-intent href="market:*" />
         <preference name="android-targetSdkVersion" value="28" />
         <plugin name="cordova-android-support-gradle-release">

@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "201049171394",
-    "firebase_url": "https://eldawlia-app.firebaseio.com",
-    "project_id": "eldawlia-app",
-    "storage_bucket": "eldawlia-app.appspot.com"
+    "project_number": "549829545903",
+    "firebase_url": "https://irepair16381.firebaseio.com",
+    "project_id": "irepair16381",
+    "storage_bucket": "irepair16381.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:201049171394:android:fb807b7f22fc10c3",
+        "mobilesdk_app_id": "1:549829545903:android:e6eaa33a061221ac6b295a",
         "android_client_info": {
-          "package_name": "com.webegy.aldawlia"
+          "package_name": "com.webegy.irepair"
         }
       },
       "oauth_client": [
         {
-          "client_id": "201049171394-0oflfp67mb0sk2oqvu9s83vn7dl6mu2i.apps.googleusercontent.com",
+          "client_id": "549829545903-n1gmc3rhf7foajsk6ejlf28vj4ijsfhr.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCSGN68wFrZNsmBGY7stXjQ875FGLc0-00"
+          "current_key": "AIzaSyDImoqQEhgFzuMssszioyyog6TVBl1Iaic"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "201049171394-0oflfp67mb0sk2oqvu9s83vn7dl6mu2i.apps.googleusercontent.com",
+              "client_id": "549829545903-n1gmc3rhf7foajsk6ejlf28vj4ijsfhr.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

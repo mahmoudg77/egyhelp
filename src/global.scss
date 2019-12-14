@@ -12,16 +12,17 @@
 @import '~@ionic/angular/css/flex-utils.css';
 
 ion-toolbar {
-    --background: #810505 no-repeat fixed center; 
-    --color:#fff;
+    --background: #fffefe no-repeat fixed center; 
+    --color:#088f0f;
  }
 //  ion-content{
 //      --background-color:rgb(252, 225, 225);
 //  }
 ion-content{
     //--background:url('assets/imgs/hexagon-background.png') no-repeat !important;
-    --background:#fce1e1 url('assets/imgs/bg.jpg') no-repeat fixed 0px 0px/100% 100%;
-   
+    //--background:#fce1e1 url('assets/imgs/bg.jpg') no-repeat fixed 0px 0px/100% 100%;
+    --background: rgb(137,241,155);
+    --background: linear-gradient(0deg, rgba(137,241,155,1) 0%, rgba(195,249,199,1) 11%, rgba(232,254,232,1) 21%, rgba(255,255,255,1) 67%, rgba(255,255,255,1) 100%); 
     // a,p,h1,h2,h3{
     //     color:#fad818 !important;
     // }
