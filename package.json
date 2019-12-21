@@ -34,7 +34,7 @@
 		"com-darryncampbell-cordova-plugin-intent": "1.1.8",
 		"cordova-android": "8.1.0",
 		"cordova-browser": "5.0.4",
-		"cordova-ios": "5.0.1",
+		"cordova-ios": "^5.1.1",
 		"cordova-plugin-app-version": "0.1.9",
 		"cordova-plugin-appminimize": "^1.0.1",
 		"cordova-plugin-device": "^2.0.3",
@@ -99,8 +99,8 @@
 		},
 		"platforms": [
 			"browser",
-			"ios",
-			"android"
+			"android",
+			"ios"
 		]
 	}
 }
